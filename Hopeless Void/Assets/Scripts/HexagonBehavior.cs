@@ -13,9 +13,9 @@ public class HexagonBehavior : MonoBehaviour {
 
 	public SpriteRenderer selfRenderer;
 	public bool isFlat;
-	public GameBoard.DoubleInt coordinates;
+	public Vector2 coordinates;
 
-	public void HexagonInitialize(bool isFlat, Sprite sprite, GameBoard.DoubleInt c){
+	public void HexagonInitialize(bool isFlat, Sprite sprite, Vector2 c){
 		this.isFlat = isFlat;
 		selfRenderer.sprite = sprite;
 		this.coordinates = c;
