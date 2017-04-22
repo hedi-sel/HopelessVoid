@@ -47,8 +47,10 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\GameHandler.cs" />
-     <Compile Include="Assets\Scripts\GameState.cs" />
      <Compile Include="Assets\Scripts\HexagonBehavior.cs" />
+     <Compile Include="Assets\Music\GameBoard.cs" />
+     <Compile Include="Assets\Scripts\GameHandler.cs" />
+     <Compile Include="Assets\Scripts\GameState.cs" />
      <Compile Include="Assets\Scripts\MenuState.cs" />
      <Compile Include="Assets\Scripts\SoundHandler.cs" />
      <Compile Include="Assets\Scripts\State.cs" />

@@ -15,7 +15,7 @@ public class SoundHandler : MonoBehaviour {
 	private int currentSound = 0;
 	private AudioSource[] soundPlayers = new AudioSource[NUMBER_SOUNDS] ;
 
-	void Start () {
+	void Awake () {
 		foreach(AudioClip audioClip in musiques){
 			musics.Add (audioClip.name, audioClip);
 		}
