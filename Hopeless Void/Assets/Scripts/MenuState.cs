@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class MenuState : State {
 
-	// Use this for initialization
+	void Awake () {
+
+	}
+
 	void Start () {
 		
 	}

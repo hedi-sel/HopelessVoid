@@ -1,10 +1,9 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Music\GameBoard.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\HexagonBehavior.cs">
     <Files>
-      <File FileName="Assets\Scripts\GameHandler.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\SoundHandler.cs" Line="1" Column="1" />
-      <File FileName="Assets\Music\GameBoard.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\HexagonBehavior.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\GameBoard.cs" Line="31" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
