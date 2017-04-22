@@ -4,16 +4,7 @@ using UnityEngine;
 
 public class MenuState : State {
 
-	void Awake () {
+	override public void Launch() {
 
-	}
-
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
 	}
 }

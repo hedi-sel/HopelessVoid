@@ -4,13 +4,11 @@ using UnityEngine;
 
 public abstract class State : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
+	public void Awake(){
+		GameHandler.instance.SetMState(this);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+	public virtual void Launch () {}
+
+	public virtual void Stop () {}
 }

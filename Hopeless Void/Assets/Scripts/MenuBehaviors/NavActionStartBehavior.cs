@@ -4,5 +4,7 @@ using UnityEngine;
 
 public class NavActionStartBehavior : NavActionBehavior {
 
-	override public void Action() {}
+	override public void Action() {
+		GameHandler.instance.SetState ("GameScene");
+	}
 }
