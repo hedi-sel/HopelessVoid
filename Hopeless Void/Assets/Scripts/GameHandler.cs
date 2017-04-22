@@ -21,7 +21,7 @@ public class GameHandler : MonoBehaviour {
 	}
 	// Use this for initialization
 	void Start () {
-		soundHandler.playMusic ("test");
+		//soundHandler.playMusic ("test");
 	}
 	
 	// Update is called once per frame
