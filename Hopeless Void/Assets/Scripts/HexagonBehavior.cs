@@ -11,13 +11,13 @@ public enum Building {
 
 public class HexagonBehavior : MonoBehaviour {
 
-	public SpriteRenderer renderer;
+	public SpriteRenderer selfRenderer;
 
 	public bool isFlat;
 
 	public void HexagonInitialize(bool isFlat, Sprite sprite){
 		this.isFlat = isFlat;
-		renderer.sprite = sprite;
+		selfRenderer.sprite = sprite;
 
 	}
 	void Awake() {

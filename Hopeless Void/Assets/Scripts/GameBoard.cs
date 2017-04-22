@@ -34,9 +34,9 @@ public class GameBoard : MonoBehaviour {
 	}
 		
 	public class DoubleInt{
-		int i,j;
-		public DoubleInt(int i, int j){
-			this.i = i; this.j = j;
+		int x,y;
+		public DoubleInt(int x, int y){
+			this.x = x; this.y = y;
 		}
 		public Vector3 getPosition(){
 			return new Vector3 (0, 0, 0);
