@@ -12,6 +12,7 @@ public enum Building {
 public class HexagonBehavior : MonoBehaviour {
 
 	public SpriteRenderer renderer;
+
 	public bool isFlat;
 
 	public void HexagonInitialize(bool isFlat, Sprite sprite){
@@ -19,7 +20,6 @@ public class HexagonBehavior : MonoBehaviour {
 		renderer.sprite = sprite;
 
 	}
-
 	void Awake() {
 		
 	}
