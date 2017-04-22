@@ -11,21 +11,17 @@ public enum Building {
 
 public class HexagonBehavior : MonoBehaviour {
 
-	public Sprite[] plains;
-	public Sprite[] mountains;
-
 	public SpriteRenderer renderer;
-	public bool isflat;
-	public 
+	public bool isFlat;
+
+	public void HexagonInitialize(bool isFlat, Sprite sprite){
+		this.isFlat = isFlat;
+		renderer.sprite = sprite;
+
+	}
 
 	void Awake() {
-		Sprite[] sprites;
-		if (isflat) {
-			sprites = plains;
-		} else {
-			sprites = mountains;
-		}
-		renderer.sprite = sprites[Random.Range (0, sprites.Length)];
+		
 	}
 
 	void Start () {

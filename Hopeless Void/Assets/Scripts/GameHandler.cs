@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameHandler : MonoBehaviour {
+	
 
 	static private GameHandler m_Instance;
 	static public GameHandler instance { get { return m_Instance; } }
