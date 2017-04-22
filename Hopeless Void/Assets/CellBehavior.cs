@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameBoard : MonoBehaviour {
+public class CellBehavior : MonoBehaviour {
 
-	public static 
+	public CellBehavior;
+	public GameHandler gameHandler = GameHandler.instance();
 
 	void Start () {
 		
