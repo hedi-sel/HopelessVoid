@@ -16,7 +16,6 @@ public class HexagonBehavior : MonoBehaviour {
 
 	public SpriteRenderer renderer;
 	public bool isflat;
-	public 
 
 	void Awake() {
 		Sprite[] sprites;

@@ -1,3 +1,4 @@
 *.kra
 Library/
 Temp/
+obj/

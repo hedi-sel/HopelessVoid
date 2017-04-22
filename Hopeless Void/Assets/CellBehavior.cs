@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CellBehavior : MonoBehaviour {
 
-	public CellBehavior;
-	public GameHandler gameHandler = GameHandler.instance();
+	public CellBehavior c;
+	public GameHandler gameHandler = GameHandler.instance;
 
 	void Start () {
 		
