@@ -12,13 +12,13 @@ public enum Building {
 public class HexagonBehavior : MonoBehaviour {
 
 	public SpriteRenderer selfRenderer;
-
 	public bool isFlat;
+	public GameBoard.DoubleInt coordinates;
 
-	public void HexagonInitialize(bool isFlat, Sprite sprite){
+	public void HexagonInitialize(bool isFlat, Sprite sprite, GameBoard.DoubleInt c){
 		this.isFlat = isFlat;
 		selfRenderer.sprite = sprite;
-
+		this.coordinates = c;
 	}
 	void Awake() {
 		

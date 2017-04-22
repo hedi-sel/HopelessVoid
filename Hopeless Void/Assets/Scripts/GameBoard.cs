@@ -14,7 +14,7 @@ public class GameBoard : MonoBehaviour {
 	private Dictionary<DoubleInt,HexagonBehavior> map = new Dictionary<DoubleInt,HexagonBehavior>();
 
 	void Start () {
-		CreateCell (new DoubleInt (0, 0), true);
+		CreateCell ( new DoubleInt(0, 0) , true );
 	}
 	
 	// Update is called once per frame
@@ -29,7 +29,7 @@ public class GameBoard : MonoBehaviour {
 			sprites = mountains;
 		}
 		HexagonBehavior hex = Instantiate (prefabHexagon, c.getPosition(), Quaternion.identity).GetComponent<HexagonBehavior>();
-		hex.HexagonInitialize ( isFlat, sprites[Random.Range (0, sprites.Length)] );
+		hex.HexagonInitialize ( isFlat, sprites[Random.Range (0, sprites.Length)], c );
 		map.Add(c, hex);
 	}
 		
