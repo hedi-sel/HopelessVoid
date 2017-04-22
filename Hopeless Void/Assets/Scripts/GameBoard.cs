@@ -15,10 +15,12 @@ public class GameBoard : MonoBehaviour {
 
 	private Dictionary<Vector2,HexagonBehavior> map = new Dictionary<Vector2,HexagonBehavior>();
 	private Dictionary<Direction,Vector2> dirToVect = new Dictionary<Direction,Vector2>();
+	private Vector2[] directions = new Vector2[6];
 
 	void Start () {
 		dirToVectInit ();
-		generateMap (9);
+		generateMap ( new Vector2(15,5) );
+
 
 	}
 	
@@ -27,23 +29,36 @@ public class GameBoard : MonoBehaviour {
 		
 	}
 	// TEST
-	public void generateMap(int nMax){
-		int n = 0; 
+	public void generateMap(Vector2 cells){
+		foreach (Vector2 v in directions) {
+			Debug.Log (v.x + " " + v.y);
+		}
 		Vector2 c = new Vector2 (0, 0);
-		while (n<nMax) {
-			if (!map.ContainsKey (c)) {
-				createCell (c, Random.Range (0, 9) >= 3);
-				n++;
+		if (cells.x + cells.y >= 6)
+			foreach (Vector2 dir in directions) {
+				cells = cells + ( (createCell (dir, cells)) ? new Vector2 (-1, 0) : new Vector2 (0, -1) );
 			}
-			c = c + new Vector2(Random.Range(0,3)-1,Random.Range(0,3)-1) ;
+		while (cells.x+cells.y > 0) {
+			if (!map.ContainsKey (c) && constructible(c)) {
+				cells = cells + ( (createCell (c, cells)) ? new Vector2 (-1, 0) : new Vector2 (0, -1) );
+			}
+			HexagonBehavior[] hexagons = new HexagonBehavior[map.Count];
+			map.Values.CopyTo (hexagons, 0);
+			c = hexagons[Random.Range(0,map.Count)].coordinates + directions[Random.Range(0,6)] ;
+		
 		}
 	}
+
 	// /TEST
 
 	private bool destructible (HexagonBehavior hex){
-		Dictionary<Direction,HexagonBehavior> hexNeighbors = getNeighbors (hex);
-		if (hexNeighbors.Count > 3)
+		if (getNeighbors (hex).Count > 3)
 			return false;
+		return constructible (hex.coordinates);
+	}
+
+	private bool constructible (Vector2 coordinates){ //Doesn't create an anus!
+		Dictionary<Direction,HexagonBehavior> hexNeighbors = getNeighbors (coordinates);
 		bool last = hexNeighbors.ContainsKey (Direction.SE); 
 		int transitions = 0; 
 		bool current;
@@ -66,19 +81,21 @@ public class GameBoard : MonoBehaviour {
 		dirToVect.Add (Direction.W ,	new Vector2 (-1,0));
 		dirToVect.Add (Direction.SW,	new Vector2 (0,-1));
 		dirToVect.Add (Direction.SE,	new Vector2 (-1,1));
+		dirToVect.Values.CopyTo (directions, 0);
 
 	}
 
-	void createCell(Vector2 c, bool isFlat){
+	bool createCell(Vector2 c, Vector2 cells){
+		bool isFlat = Random.Range (0, cells.x+cells.y) >= cells.y;
 		Sprite[] sprites;
-		if (isFlat) {
+		if (isFlat)
 			sprites = plains;
-		} else {
+		else 
 			sprites = mountains;
-		}
 		HexagonBehavior hex = Instantiate (prefabHexagon, getPosition(c), Quaternion.identity, this.gameObject.GetComponent<Transform>()).GetComponent<HexagonBehavior>();
 		hex.HexagonInitialize ( isFlat, sprites[Random.Range (0, sprites.Length)], c);
 		map.Add(c, hex);
+		return isFlat;
 	}
 
 	private Dictionary<Direction,HexagonBehavior> getNeighbors(HexagonBehavior hex){
@@ -86,6 +103,16 @@ public class GameBoard : MonoBehaviour {
 		foreach (Direction d in dirToVect.Keys) {
 			if (  map.ContainsKey ( hex.coordinates+ (dirToVect[d]) )  ) {
 				neighbors.Add (d, map [hex.coordinates+ (dirToVect [d])]);
+			}
+		}
+		return neighbors;
+	}
+
+	private Dictionary<Direction,HexagonBehavior> getNeighbors(Vector2 coordinates){
+		Dictionary<Direction,HexagonBehavior> neighbors = new Dictionary<Direction,HexagonBehavior> ();
+		foreach (Direction d in dirToVect.Keys) {
+			if (  map.ContainsKey ( coordinates+ (dirToVect[d]) )  ) {
+				neighbors.Add (d, map [coordinates+ (dirToVect [d])]);
 			}
 		}
 		return neighbors;
