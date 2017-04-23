@@ -22,6 +22,10 @@ public class BottomBarBehavior : MonoBehaviour {
 		actionHolder = GetComponentInChildren<ActionHolderBehavior> ();
 	}
 
+	public void Off(){
+		gameObject.SetActive (false);
+	}
+
 	public void Open(HexagonBehavior _hexagon){
 		hexagon = _hexagon;
 		actionHolder.Close ();

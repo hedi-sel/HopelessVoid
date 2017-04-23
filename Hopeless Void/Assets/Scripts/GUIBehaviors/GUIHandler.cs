@@ -73,7 +73,7 @@ public class GUIHandler : MonoBehaviour {
 
 	public void Close(){
 		opened = false;
-		bottom.gameObject.SetActive (false);
+		bottom.Off ();
 		outline.SetActive (false);
 	}
 }
