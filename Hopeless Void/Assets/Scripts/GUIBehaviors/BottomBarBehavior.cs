@@ -28,6 +28,8 @@ public class BottomBarBehavior : MonoBehaviour {
 
 	public void Open(HexagonBehavior _hexagon){
 		hexagon = _hexagon;
+		peopleMax = hexagon.getMaxPopulation ();
+		people.Refresh (hexagon.population, peopleMax);
 		actionHolder.Close ();
 		actionHolder.SetActions( _hexagon.getActionPlanelList ());
 	}
