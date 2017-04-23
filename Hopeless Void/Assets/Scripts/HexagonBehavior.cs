@@ -58,6 +58,10 @@ public class HexagonBehavior : MonoBehaviour {
 		return true;
 	}
 
+	public int getMaxPopulation(){
+		return ConstantBoard.popMax [building];
+	}
+
 	public string actionToString (BuildingAction action){
 		if (action == this.building)
 			return "Harvesting "+action;
