@@ -25,6 +25,7 @@ public class HexagonBehavior : MonoBehaviour {
 	public int remainingWork;
 	public int locked;
 
+	[HideInInspector]
 	public PopulationOnHexagonBehavior populationOnHexagon;
 
 	public void HexagonInitialize(bool isFlat, Sprite sprite, Vector2 c){
