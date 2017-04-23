@@ -11,11 +11,23 @@ public class BottomBarBehavior : MonoBehaviour {
 	public int peopleMax;
 	public bool hovered;
 
+	public ActionPanelBehavior actionPanel;
+	private ActionPanel[] actions;
+	private int curAction;
+
 	public HexagonBehavior hexagon;
 
 	public void Awake(){
 		rect = GetComponent<RectTransform> ();
 		box = GetComponent<BoxCollider2D> ();
+	}
+
+	public void Open(HexagonBehavior _hexagon){
+		hexagon = _hexagon;
+		actions = _hexagon.getActionPlanelList ();
+		curAction = 0;
+		print ("Violence");
+		actionPanel.SetActionPanel (actions [curAction]);
 	}
 
 	public void Update(){

@@ -65,6 +65,7 @@ public class GUIHandler : MonoBehaviour {
 		opened = true;
 		bottom.gameObject.SetActive (true);
 		outlined = _hexagon;
+		bottom.Open (_hexagon);
 		Vector3 pos = _hexagon.transform.position;
 		outline.transform.position = new Vector3(pos.x,pos.y,pos.z-5);
 		outline.SetActive (true);
