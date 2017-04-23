@@ -11,6 +11,7 @@ public struct ActionPanel {
 	public int denumerator;
 	public Sprite background;
 	public Action id;
+	public int[] actionEffect;
 }
 
 public class ActionPanelBehavior : MonoBehaviour {

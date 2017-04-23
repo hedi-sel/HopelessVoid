@@ -72,7 +72,7 @@ public class HexagonBehavior : MonoBehaviour {
 	}
 
 	public bool addPopulation(int addPop){
-		if (population + addPop <= ConstantBoard.popMax [building] && population + addPop >= 0 
+		if (population + addPop <= ConstantBoard.popAction [building] && population + addPop >= 0 
 			&& GameBoard.instance.occupiedPopulation + addPop <= GameBoard.instance.Parameters[3]) {
 			population += addPop; 
 			GameBoard.instance.occupiedPopulation += addPop;
@@ -85,7 +85,7 @@ public class HexagonBehavior : MonoBehaviour {
 	}
 
 	public int getMaxPopulation(){
-		return ConstantBoard.popMax [building];
+		return ConstantBoard.popAction [building];
 	}
 
 	public string actionToString (BuildingAction action){
@@ -172,12 +172,15 @@ public class HexagonBehavior : MonoBehaviour {
 		panel.id = action;
 		panel.denumerator = (action.isAction) ? ConstantBoard.popAction [action.action] : ConstantBoard.popConstruction [action.action];
 		panel.numerator = remainingWork;
+		panel.actionEffect = (action.isAction) ? ConstantBoard.effectAction [action.action] :
+			ConstantBoard.effectConstruction [action.action];
 
 		return panel;
 	}
 
 	public ActionPanel[] getActionPlanelList (){
-		ActionPanel[] panelList = new ActionPanel[ConstantBoard.BuildingActionList.Length];
+		ActionPanel[] panelList = new ActionPanel[ConstantBoard.BuildingActionList.Length 
+			+ ( (GameBoard.instance.destructible(this) )?1 : 0)];
 		panelList [0] = toActionPanel( new Action(action,action == building) );
 		int memory = remainingWork;
 		remainingWork = 0;
@@ -185,11 +188,14 @@ public class HexagonBehavior : MonoBehaviour {
 		foreach (BuildingAction possibleAction in ConstantBoard.BuildingActionList) {
 			if (possibleAction != action){
 				panelList [i] = toActionPanel (
-					new Action(possibleAction,possibleAction == building || possibleAction == BuildingAction.ENERGY)
+					new Action(possibleAction,possibleAction == building)
 				);
 				i++;
 			}
 		}
+		if (GameBoard.instance.destructible(this) ) 
+			panelList [ConstantBoard.BuildingActionList.Length] = 
+				toActionPanel ( new Action(BuildingAction.ENERGY,true) );
 		remainingWork = memory;
 		return panelList;
 			

@@ -139,7 +139,7 @@ public class GameBoard : MonoBehaviour {
 	}
 		
 
-	private bool destructible (HexagonBehavior hex){
+	public bool destructible (HexagonBehavior hex){
 		/*if (hex.coordinates == new Vector2(0,0) )
 			return false;*/
 		if (getNeighbors (hex).Count > 3)
