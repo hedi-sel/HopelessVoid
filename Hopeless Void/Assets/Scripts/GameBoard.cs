@@ -96,8 +96,13 @@ public class GameBoard : MonoBehaviour {
 
 
 		updateInterfaceParameters ();
-		//Verifier si les hexagones
-		//Destroy tuile
+
+		//Verifer si les tuiles sont au bords
+		foreach (HexagonBehavior hex in map.Values) {
+			if (destructible (hex)) {
+			} else {
+			}
+		}
 
 
 	}
