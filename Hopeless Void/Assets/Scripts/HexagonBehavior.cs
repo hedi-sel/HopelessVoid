@@ -18,6 +18,8 @@ public class HexagonBehavior : MonoBehaviour {
 	//GamePlay
 	public BuildingAction building;
 	public BuildingAction action;
+
+
 	public int population;
 	public int remainingWork;
 	public int locked;
@@ -27,6 +29,7 @@ public class HexagonBehavior : MonoBehaviour {
 		selfRenderer.sprite = sprite;
 		this.coordinates = c;
 		building = BuildingAction.NONE;
+		remainingWork = 0; 
 	}
 
 	public void computeRessources(){
@@ -36,6 +39,7 @@ public class HexagonBehavior : MonoBehaviour {
 
 	public bool commit() {
 		remainingWork += population;
+		//setAction (selectedAction);
 		if (action == building) {
 			computeRessources ();
 			remainingWork = remainingWork % ConstantBoard.popAction [action];
@@ -46,7 +50,6 @@ public class HexagonBehavior : MonoBehaviour {
 				selfRenderer.sprite = ConstantBoard.sprites[action.ToString()];
 			}
 		}
-		action = BuildingAction.IDLE;
 		return action == building;
 	}
 
@@ -69,6 +72,15 @@ public class HexagonBehavior : MonoBehaviour {
 			return ( (action == BuildingAction.NONE) ? "Destroy building" : "Building " + action ) ;
 	}
 
+	/*public bool selectAction (BuildingAction action){
+		if (action != building && isPositif(-ConstantBoard.effectConstruction [action] - GameBoard.instance.Ressources))
+			return false;
+		if (action == building && isPositif(-ConstantBoard.effectConstruction [action] - GameBoard.instance.Ressources))
+			return false;
+		selectedAction = action;
+		return true;
+	}*/
+
 	public bool setAction(BuildingAction action){
 		if (action != building && isPositif(-ConstantBoard.effectConstruction [action] - GameBoard.instance.Ressources))
 			return false;
@@ -82,6 +94,36 @@ public class HexagonBehavior : MonoBehaviour {
 
 	public bool isPositif(Vector3 v){
 		return v.x > 0 && v.y > 0 && v.z > 0;
+	}
+
+	public ActionPanel toActionPanel (Action action){
+		ActionPanel panel = new ActionPanel ();
+		panel.name = ConstantBoard.nameBuilding [building];
+		panel.action = (action.isAction) ? ConstantBoard.nameAction [action.action] : "Build "+ConstantBoard.nameBuilding [action.action];
+		panel.numerator = remainingWork;
+		panel.denumerator = (action.isAction) ? ConstantBoard.popAction [action.action] : ConstantBoard.popConstruction [action.action];
+		panel.id = action;
+		panel.background = ConstantBoard.backgrounds [ ConstantBoard.idBuilding[action.action] ];
+		return panel;
+	}
+
+	public ActionPanel[] getActionPlanelList (){
+		ActionPanel[] panelList = new ActionPanel[ConstantBoard.BuildingActionList.Length];
+		panelList [0] = toActionPanel( new Action(action,action == building) );
+		int memory = remainingWork;
+		remainingWork = 0;
+		int i = 1;
+		foreach (BuildingAction possibleAction in ConstantBoard.BuildingActionList) {
+			if (possibleAction != action){
+				panelList [i] = toActionPanel (new Action(possibleAction,possibleAction == building));
+				i++;
+			}
+			if (i != ConstantBoard.BuildingActionList.Length)
+				Debug.Log ("Caca au niveau de getActionPanelList");
+		}
+		remainingWork = memory;
+		return panelList;
+			
 	}
 
 	void OnMouseEnter() {

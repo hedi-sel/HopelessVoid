@@ -2,8 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameBoard : MonoBehaviour {
 
+public struct Action {
+	public BuildingAction action;
+	public bool isAction;
+
+	public Action(BuildingAction action, bool isAction){
+		this.action = action;
+		this.isAction = isAction;
+	}
+}
+
+public class GameBoard : MonoBehaviour {
+	
 	static private GameBoard m_Instance;
 	static public GameBoard instance { get { return m_Instance; } }
 	void Awake(){
@@ -43,7 +54,6 @@ public class GameBoard : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-
 
 
 
