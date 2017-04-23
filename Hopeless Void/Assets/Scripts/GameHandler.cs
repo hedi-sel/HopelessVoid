@@ -53,11 +53,29 @@ public class GameHandler : MonoBehaviour {
 		if (Input.GetButton("Right Click")) {
 			destination = destination - getMouseSpeed() ;
 		}
-		if (destination != transform.position)
-			transform.position = (destination + transform.position) / 2;
+		if ( destination != transform.position )
+			transform.position = lineariser(destination + transform.position) / 2;
 		if (Input.GetButtonUp ("Right Click")) {
 			mouseLastPos = new Vector3 (0, 0, 0);
 		}
+	}
+
+	/*bool accessible(Vector3 position){
+		return position.x < GameBoard.instance.xMax && position.y < GameBoard.instance.yMax &&
+		position.x > GameBoard.instance.xMin && position.y > GameBoard.instance.yMin;
+			
+	}*/
+
+	Vector3 lineariser(Vector3 position){
+		if (position.x < GameBoard.instance.xMax)
+			position.x = GameBoard.instance.xMax;
+		else if (position.y < GameBoard.instance.yMax)
+			position.y = GameBoard.instance.yMax;
+		else if (position.x > GameBoard.instance.xMin)
+			position.x = GameBoard.instance.xMin;
+		else if (position.y > GameBoard.instance.yMin)
+			position.y = GameBoard.instance.yMin;
+		return position;
 	}
 
 	public int mouseVelocity;
