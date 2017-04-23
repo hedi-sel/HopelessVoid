@@ -26,7 +26,6 @@ public class BottomBarBehavior : MonoBehaviour {
 		hexagon = _hexagon;
 		actions = _hexagon.getActionPlanelList ();
 		curAction = 0;
-		print ("Violence");
 		actionPanel.SetActionPanel (actions [curAction]);
 	}
 
