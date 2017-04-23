@@ -16,11 +16,11 @@ public class TopBarBehavior : MonoBehaviour {
 	}
 		
 	public void SetMetal(int value){
-		food.text = value.ToString();
+		metal.text = value.ToString();
 	}
 		
 	public void SetCrystal(int value){
-		food.text = value.ToString();
+		crystal.text = value.ToString();
 	}
 
 	public void SetPeople(int value, int outOf){
