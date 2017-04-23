@@ -59,6 +59,9 @@ public class GameBoard : MonoBehaviour {
 		GUIHandler.instance.top.SetPeople (Parameters[3]-occupiedPopulation, Parameters[3] );
 		GUIHandler.instance.top.SetCapsule (Parameters[4], maxCapsule);
 	}
+
+	public Sprite voidSprite;
+
 	public void commit() {
 		
 		if (map.Count == 1 || Parameters[3]<1 ){
@@ -100,7 +103,9 @@ public class GameBoard : MonoBehaviour {
 		//Verifer si les tuiles sont au bords
 		foreach (HexagonBehavior hex in map.Values) {
 			if (destructible (hex)) {
+				hex.effectRenderer.sprite = voidSprite;
 			} else {
+				hex.effectRenderer.sprite = null;
 			}
 		}
 
