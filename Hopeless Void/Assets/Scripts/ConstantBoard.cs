@@ -21,8 +21,8 @@ public class ConstantBoard : MonoBehaviour {
 		popConstruction.Add (BuildingAction.FACTORY, 5);
 		popConstruction.Add (BuildingAction.CAPITALE, 0);
 		//effectAction
-		effectAction.Add (BuildingAction.IDLE, new int[] {0, 0, 0, 0, 0});
-		effectAction.Add (BuildingAction.NONE, new int[] {5, 5, 0, 0, 0});
+		effectAction.Add (BuildingAction.IDLE, new int[] {0, 5, 0, 0, 0});
+		effectAction.Add (BuildingAction.NONE, new int[] {5, 0, 0, 0, 0});
 		effectAction.Add (BuildingAction.FACTORY, new int[] {0, -5, 10, 0, 0});
 		effectAction.Add (BuildingAction.CAPITALE, new int[] {0, 0, 0, 0, 0});
 		//effectConstruction
@@ -41,6 +41,7 @@ public class ConstantBoard : MonoBehaviour {
 		nameAction.Add(BuildingAction.NONE,"Harvest");
 		nameAction.Add(BuildingAction.FACTORY,"Working");
 		//Nom des batiments
+		nameBuilding.Add(BuildingAction.IDLE,"Mountain");
 		nameBuilding.Add(BuildingAction.NONE,"Plain");
 		nameBuilding.Add(BuildingAction.FACTORY,"Working");
 		nameBuilding.Add(BuildingAction.CAPITALE,"Nothing");

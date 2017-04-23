@@ -40,18 +40,40 @@ public class GameBoard : MonoBehaviour {
 	private Direction[] directions = new Direction[6];
 
 	public int[] Parameters;  //food, metal, energy, population, capsule
+	public int maxCapsule;
+	public int occupiedPopulation;
+
 	public void modifyParameters (int a, int[] modif){
 		for (int i = 0; i < Parameters.Length; i++) {
 			Parameters [i] += a*modif [i];
 		}
 	}
-
-
+		
+	public void updateInterfaceParameters() {
+		GUIHandler.instance.top.SetFood (Parameters[0]);
+		GUIHandler.instance.top.SetMetal (Parameters[1]);
+		GUIHandler.instance.top.SetCrystal (Parameters[2]);
+		GUIHandler.instance.top.SetPeople (Parameters[3]-occupiedPopulation, Parameters[3] );
+		GUIHandler.instance.top.SetCapsule (Parameters[4], maxCapsule);
+	}
 	public void commit() {
-		foreach (HexagonBehavior hexagon in map.Values) {
-			hexagon.commit ();
+		foreach (HexagonBehavior hex in map.Values) {
+			hex.commit ();
 		}
-
+		int food = Parameters [0];
+		if (food < Parameters [3]) {//Print Population died
+		}
+		Parameters [0] = (food >= Parameters [3])? (food - Parameters [3]) : 0;
+		Parameters [3] = (food >= Parameters [3])? Parameters [3] : food;
+		//Destroy tuile
+		HexagonBehavior[] hexagons = new HexagonBehavior[map.Count];
+		map.Values.CopyTo (hexagons, 0);
+		HexagonBehavior hexagon = hexagons[0];
+		while (!destructible(hexagon)) {
+			hexagon = hexagons [Random.Range (0, map.Count)];
+		}
+		hexagon.destroy ();
+		updateInterfaceParameters ();
 	}
 		
 	//HexagonProperties
@@ -87,6 +109,8 @@ public class GameBoard : MonoBehaviour {
 		
 
 	private bool destructible (HexagonBehavior hex){
+		if (hex.coordinates == new Vector2(0,0) )
+			return false;
 		if (getNeighbors (hex).Count > 3)
 			return false;
 		return constructible (hex.coordinates);

@@ -35,7 +35,10 @@ public class HexagonBehavior : MonoBehaviour {
 
 	public void computeRessources(){
 		Debug.Log (remainingWork / ConstantBoard.popAction [action]);
-		GameBoard.instance.modifyParameters (remainingWork / ConstantBoard.popAction [action] 
+		if (action == BuildingAction.NONE && !isFlat) GameBoard.instance.modifyParameters (remainingWork / ConstantBoard.popAction [action] 
+			, ConstantBoard.effectAction [BuildingAction.IDLE]); // IF harvesting a mountain
+		else
+			GameBoard.instance.modifyParameters (remainingWork / ConstantBoard.popAction [action] 
 			, ConstantBoard.effectAction [action]);
 	}
 
@@ -60,8 +63,10 @@ public class HexagonBehavior : MonoBehaviour {
 	}
 
 	public bool addPopulation(int addPop){
-		if ( population+addPop < ConstantBoard.popMax[building] && population+addPop >= 0)
+		if (population + addPop < ConstantBoard.popMax [building] && population + addPop >= 0) {
 			population += addPop; 
+			GameBoard.instance.occupiedPopulation += addPop;
+		}
 		else
 			return false; 
 		return true;
@@ -87,6 +92,12 @@ public class HexagonBehavior : MonoBehaviour {
 		return true;
 	}*/
 
+	public void destroy (){ // A modifier
+		GameBoard.instance.Parameters [3] -= population;
+		//Jouer l'animation
+		this.destroy ();
+	}
+
 	public bool setAction(BuildingAction action){
 		if ( action != building && isSuperior(GameBoard.instance.Parameters , ConstantBoard.effectConstruction [action] ) )
 			return false;
@@ -97,6 +108,7 @@ public class HexagonBehavior : MonoBehaviour {
 		this.action = action;
 		return true;
 	}
+		
 
 	public bool isSuperior(int[] l1, int[] l2){
 		bool superior = true;
@@ -107,7 +119,10 @@ public class HexagonBehavior : MonoBehaviour {
 
 	public ActionPanel toActionPanel (Action action){
 		ActionPanel panel = new ActionPanel ();
-		panel.name = ConstantBoard.nameBuilding [building];
+		if (action.action == BuildingAction.NONE && !isFlat) // if harvesting or constructing a Mountain
+			panel.name = ConstantBoard.nameBuilding [BuildingAction.IDLE];
+		else
+			panel.name = ConstantBoard.nameBuilding [building];
 		if (action.action == BuildingAction.IDLE) {
 			panel.action = "Nothing";
 			panel.background = ConstantBoard.backgrounds [ConstantBoard.idBuilding [building]];
