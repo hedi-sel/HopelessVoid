@@ -72,7 +72,7 @@ public class HexagonBehavior : MonoBehaviour {
 	}
 
 	public bool addPopulation(int addPop){
-		if (population + addPop <= ConstantBoard.popMax [building] && population + addPop >= 0 
+		if (population + addPop <= ConstantBoard.popAction [building] && population + addPop >= 0 
 			&& GameBoard.instance.occupiedPopulation + addPop <= GameBoard.instance.Parameters[3]) {
 			population += addPop; 
 			GameBoard.instance.occupiedPopulation += addPop;
@@ -85,7 +85,7 @@ public class HexagonBehavior : MonoBehaviour {
 	}
 
 	public int getMaxPopulation(){
-		return ConstantBoard.popMax [building];
+		return ConstantBoard.popAction [building];
 	}
 
 	public string actionToString (BuildingAction action){

@@ -6,13 +6,8 @@ public class ConstantBoard : MonoBehaviour {
 	
 	public void  HexagonPropertiesInit (){
 		BuildingActionList = new BuildingAction[] { BuildingAction.IDLE, BuildingAction.NONE, BuildingAction.FACTORY};
-		//popMax
-		popMax.Add (BuildingAction.IDLE, 10);
-		popMax.Add (BuildingAction.NONE, 10);
-		popMax.Add (BuildingAction.FACTORY, 20);
-		popMax.Add (BuildingAction.CAPITALE, 0);
 		//popAction
-		popAction.Add (BuildingAction.IDLE, 0);
+		popAction.Add (BuildingAction.IDLE, 10);
 		popAction.Add (BuildingAction.NONE, 2);
 		popAction.Add (BuildingAction.ENERGY, 2);
 		popAction.Add (BuildingAction.FACTORY, 5);
@@ -64,7 +59,6 @@ public class ConstantBoard : MonoBehaviour {
 	public Sprite[] plainSprites;
 	public Sprite[] mountainSprites;
 
-	public static Dictionary<BuildingAction,int> popMax = new Dictionary<BuildingAction,int> ();
 	public static Dictionary<BuildingAction,int> popAction = new Dictionary<BuildingAction,int> ();
 	public static Dictionary<BuildingAction,int> popConstruction = new Dictionary<BuildingAction,int> ();
 
