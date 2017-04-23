@@ -67,7 +67,6 @@ public class GameBoard : MonoBehaviour {
 
 
 	public void generateMap(Vector2 cells){
-
 		Vector2 c = new Vector2 (0, 0);
 		if (cells.x + cells.y >= 6)
 			foreach (Vector2 dir in directionsVector2) {

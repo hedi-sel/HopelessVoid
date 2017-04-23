@@ -38,15 +38,13 @@ public class ConstantBoard : MonoBehaviour {
 		}
 		//Nom des actions
 		nameAction.Add(BuildingAction.IDLE,"Nothing");
-		nameAction.Add(BuildingAction.NONE,"Harvesting");
+		nameAction.Add(BuildingAction.NONE,"Harvest");
 		nameAction.Add(BuildingAction.FACTORY,"Working");
 		//Nom des batiments
-		nameBuilding.Add(BuildingAction.IDLE,"Mountain");
-		nameBuilding.Add(BuildingAction.NONE,"Plaine");
+		nameBuilding.Add(BuildingAction.NONE,"Plain");
 		nameBuilding.Add(BuildingAction.FACTORY,"Working");
-		nameBuilding.Add(BuildingAction.CAPITALE,"Working");
+		nameBuilding.Add(BuildingAction.CAPITALE,"Nothing");
 		//ID des sprites de batiments
-		idBuilding.Add(BuildingAction.IDLE,"Food");
 		idBuilding.Add(BuildingAction.NONE,"Food");
 		idBuilding.Add(BuildingAction.FACTORY,"Metal");
 		idBuilding.Add(BuildingAction.CAPITALE,"Crystal");
