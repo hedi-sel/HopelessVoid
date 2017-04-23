@@ -29,6 +29,9 @@ public class GameBoard : MonoBehaviour {
 		E,NE,NW,W,SW,SE
 	};
 
+	public static void DeleteInstance(){
+		m_Instance = null;
+	}
 
 	public int MapHeight;
 	public int MapWidth;
