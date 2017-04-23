@@ -5,7 +5,7 @@ using UnityEngine;
 public class ConstantBoard : MonoBehaviour {
 	
 	public void  HexagonPropertiesInit (){
-		BuildingActionList = new BuildingAction[] { BuildingAction.IDLE, BuildingAction.NONE, BuildingAction.FACTORY };
+		BuildingActionList = new BuildingAction[] { BuildingAction.IDLE, BuildingAction.NONE, BuildingAction.FACTORY, BuildingAction.FACTORY };
 		//popMax
 		popMax.Add (BuildingAction.IDLE, 10);
 		popMax.Add (BuildingAction.NONE, 10);
@@ -14,6 +14,7 @@ public class ConstantBoard : MonoBehaviour {
 		//popAction
 		popAction.Add (BuildingAction.IDLE, 0);
 		popAction.Add (BuildingAction.NONE, 2);
+		popAction.Add (BuildingAction.ENERGY, 2);
 		popAction.Add (BuildingAction.FACTORY, 5);
 		popAction.Add (BuildingAction.CAPITALE, 0);
 		//popConstruction
@@ -24,12 +25,13 @@ public class ConstantBoard : MonoBehaviour {
 		//effectAction
 		effectAction.Add (BuildingAction.IDLE, new int[] {0, 5, 0, 0, 0});
 		effectAction.Add (BuildingAction.NONE, new int[] {5, 0, 0, 0, 0});
+		effectAction.Add (BuildingAction.ENERGY, new int[] {0, 5, 0, 0, 0});
 		effectAction.Add (BuildingAction.FACTORY, new int[] {0, -5, 10, 0, 0});
 		effectAction.Add (BuildingAction.CAPITALE, new int[] {0, 0, 0, 0, 0});
 		//effectConstruction
 		effectConstruction.Add (BuildingAction.IDLE, new int[] {0, 0, 0, 0, 0});
 		effectConstruction.Add (BuildingAction.NONE, new int[] {0, 10, 0, 0, 0});
-		effectConstruction.Add (BuildingAction.FACTORY, new int[] {0, -20, 0, 0, 0});
+		effectConstruction.Add (BuildingAction.FACTORY, new int[] {0, -20, -10, 0, 0});
 		effectConstruction.Add (BuildingAction.CAPITALE, new int[] {0, 0, 0, 0, 0});
 		//sprites
 		foreach (Sprite sprite in buildingSprites) {
@@ -45,8 +47,8 @@ public class ConstantBoard : MonoBehaviour {
 		//Nom des batiments
 		nameBuilding.Add(BuildingAction.IDLE,"Mountain");
 		nameBuilding.Add(BuildingAction.NONE,"Plain");
-		nameBuilding.Add(BuildingAction.FACTORY,"Working");
-		nameBuilding.Add(BuildingAction.CAPITALE,"Nothing");
+		nameBuilding.Add(BuildingAction.FACTORY,"Factory");
+		nameBuilding.Add(BuildingAction.CAPITALE,"Capital");
 		//ID des sprites de batiments
 		idBuilding.Add(BuildingAction.NONE,"Food");
 		idBuilding.Add(BuildingAction.FACTORY,"Metal");

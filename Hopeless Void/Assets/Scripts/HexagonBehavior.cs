@@ -6,7 +6,8 @@ public enum BuildingAction {
 	IDLE,
 	NONE,
 	FACTORY,
-	CAPITALE
+	CAPITALE,
+	ENERGY
 };
 
 public class HexagonBehavior : MonoBehaviour {
@@ -47,6 +48,10 @@ public class HexagonBehavior : MonoBehaviour {
 	public bool commit() {
 		if (action == BuildingAction.IDLE)
 			return true;
+		else if (action == BuildingAction.ENERGY) {
+			computeRessources ();
+			remainingWork = remainingWork % ConstantBoard.popAction [action];
+		}
 		else {
 			remainingWork += population;
 			//setAction (selectedAction);
@@ -60,8 +65,8 @@ public class HexagonBehavior : MonoBehaviour {
 					selfRenderer.sprite = ConstantBoard.sprites [action.ToString ()];
 				}
 			}
-			return action == building;
 		}
+		return true;
 	}
 
 	public bool addPopulation(int addPop){
@@ -99,6 +104,7 @@ public class HexagonBehavior : MonoBehaviour {
 
 	public void collapse (){ // A modifier
 		GameBoard.instance.Parameters [3] -= population;
+		GameBoard.instance.occupiedPopulation -= population;
 		//Jouer l'animation
 		Destroy(gameObject);
 	}
@@ -106,11 +112,11 @@ public class HexagonBehavior : MonoBehaviour {
 	public bool setAction(BuildingAction action){
 		if (action != BuildingAction.IDLE) {
 			if (action != building) {
-				if (isSuperior (GameBoard.instance.Parameters, neg (ConstantBoard.effectConstruction [action])))
-					return false;
-				else {
+				if (isSuperior (GameBoard.instance.Parameters, neg (ConstantBoard.effectConstruction [action]))) {
 					GameBoard.instance.modifyParameters (ConstantBoard.effectConstruction [action]);
 					remainingWork = 0;
+				}else {
+					return false;
 				}
 			}
 			if (action == building && isSuperior (GameBoard.instance.Parameters, ConstantBoard.effectConstruction [action]))
@@ -124,8 +130,9 @@ public class HexagonBehavior : MonoBehaviour {
 
 	public bool isSuperior(int[] l1, int[] l2){
 		bool superior = true;
-		for (int i = 0; i < l1.Length; i++)
+		for (int i = 0; i < l1.Length; i++) {
 			superior = superior && (l1 [i] > l2 [i]);
+		}
 		return superior;
 	}
 	public int[] neg(int[] l){
@@ -137,14 +144,23 @@ public class HexagonBehavior : MonoBehaviour {
 
 	public ActionPanel toActionPanel (Action action){
 		ActionPanel panel = new ActionPanel ();
-		if (action.action == BuildingAction.NONE && !isFlat) // if harvesting or constructing a Mountain
+		if (action.action == BuildingAction.NONE && !isFlat) { // if harvesting or constructing a Mountain
 			panel.name = ConstantBoard.nameBuilding [BuildingAction.IDLE];
-		else
-			panel.name = ConstantBoard.nameBuilding [building];
+			panel.action = (action.isAction) ? ConstantBoard.nameAction [action.action] :
+			("Build " + ConstantBoard.nameBuilding [action.action]);
+			panel.background = ConstantBoard.backgrounds [ConstantBoard.idBuilding [action.action]];
+			panel.background = ConstantBoard.backgrounds [ConstantBoard.idBuilding [action.action]];
+		}
 		if (action.action == BuildingAction.IDLE) {
+			panel.name = ConstantBoard.nameBuilding [building];
 			panel.action = "Nothing";
 			panel.background = ConstantBoard.backgrounds [ConstantBoard.idBuilding [building]];
+		} else if (action.action == BuildingAction.ENERGY) {
+			panel.name = "Void";
+			panel.action = "Harvesting Energy";
+			panel.background = ConstantBoard.backgrounds [ConstantBoard.idBuilding [building]];
 		} else {
+			panel.name = ConstantBoard.nameBuilding [action.action];
 			panel.action = (action.isAction) ? ConstantBoard.nameAction [action.action] :
 			("Build " + ConstantBoard.nameBuilding [action.action]);
 			panel.background = ConstantBoard.backgrounds [ConstantBoard.idBuilding [action.action]];
