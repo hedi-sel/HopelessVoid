@@ -110,9 +110,14 @@ public class GameBoard : MonoBehaviour {
 		ConstantBoard.instance.HexagonPropertiesInit ();
 	}
 	
-	// Update is called once per frame
+	private float currentScale=0.5f;
 
-
+	void Update(){
+		float delta = 1.5f*Input.GetAxis("Mouse Scroll");
+		currentScale = (1 + delta)*currentScale;
+		currentScale = Mathf.Min (1f, Mathf.Max (0.2f, currentScale));
+		transform.localScale = currentScale*Vector2.one;
+	}
 
 	public void generateMap(Vector2 cells){
 		Vector2 c = new Vector2 (0, 0);
