@@ -12,6 +12,7 @@ public struct ActionPanel {
 	public Sprite background;
 	public Action id;
 	public int[] actionEffect;
+	public int populationNeeded;
 }
 
 public class ActionPanelBehavior : MonoBehaviour {

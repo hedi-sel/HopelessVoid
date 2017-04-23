@@ -106,8 +106,8 @@ public class GameBoard : MonoBehaviour {
 
 	void Start () {
 		dirToVectInit ();
-		generateMap ( new Vector2(15,5) );
 		ConstantBoard.instance.HexagonPropertiesInit ();
+		generateMap ( new Vector2(15,5) );
 	}
 	
 	private float currentScale=0.5f;

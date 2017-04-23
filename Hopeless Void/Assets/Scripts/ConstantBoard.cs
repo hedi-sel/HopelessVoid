@@ -5,7 +5,7 @@ using UnityEngine;
 public class ConstantBoard : MonoBehaviour {
 	
 	public void  HexagonPropertiesInit (){
-		BuildingActionList = new BuildingAction[] { BuildingAction.IDLE, BuildingAction.NONE, BuildingAction.FACTORY};
+		BuildingActionList = new BuildingAction[] { /*BuildingAction.IDLE,*/ BuildingAction.NONE, BuildingAction.FACTORY};
 		//popAction
 		popAction.Add (BuildingAction.IDLE, 10);
 		popAction.Add (BuildingAction.NONE, 1);
@@ -20,7 +20,7 @@ public class ConstantBoard : MonoBehaviour {
 		//effectAction
 		effectAction.Add (BuildingAction.IDLE, new int[] {0, 3, 0, 0, 0});
 		effectAction.Add (BuildingAction.NONE, new int[] {3, 0, 0, 0, 0});
-		effectAction.Add (BuildingAction.ENERGY, new int[] {0, 5, 0, 0, 0});
+		effectAction.Add (BuildingAction.ENERGY, new int[] {0, 0, 5, 0, 0});
 		effectAction.Add (BuildingAction.FACTORY, new int[] {0, -5, 0, 10, 0});
 		effectAction.Add (BuildingAction.CAPITALE, new int[] {0, 0, 0, 0, 0});
 		//effectConstruction
@@ -48,9 +48,12 @@ public class ConstantBoard : MonoBehaviour {
 		nameBuilding.Add(BuildingAction.FACTORY,"Factory");
 		nameBuilding.Add(BuildingAction.CAPITALE,"Capital");
 		//ID des sprites de batiments
-		idBuilding.Add(BuildingAction.NONE,"Food");
-		idBuilding.Add(BuildingAction.FACTORY,"Metal");
-		idBuilding.Add(BuildingAction.CAPITALE,"Crystal");
+		idBuilding.Add(BuildingAction.NONE,"Hexagon_Plain_1");
+		idBuilding.Add(BuildingAction.FACTORY,"Factory");
+
+		idBackground.Add(BuildingAction.NONE,"Food");
+		idBackground.Add(BuildingAction.FACTORY,"Metal");
+		idBackground.Add(BuildingAction.ENERGY,"Cristal");
 
 		GameBoard.instance.updateInterfaceParameters ();
 
@@ -71,6 +74,7 @@ public class ConstantBoard : MonoBehaviour {
 
 	public static Dictionary<BuildingAction,string> nameAction = new Dictionary<BuildingAction,string> ();
 	public static Dictionary<BuildingAction,string> nameBuilding = new Dictionary<BuildingAction,string> ();
+	public static Dictionary<BuildingAction,string> idBackground = new Dictionary<BuildingAction,string> ();
 	public static Dictionary<BuildingAction,string> idBuilding = new Dictionary<BuildingAction,string> ();
 
 	public static Dictionary<string,Sprite> sprites = new Dictionary<string,Sprite> ();
