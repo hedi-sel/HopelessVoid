@@ -40,5 +40,40 @@ public class ActionPanelBehavior : MonoBehaviour {
 		imageBackground.sprite = _actionPanel.background;
 		transformBar.anchorMax = new Vector2(((float) _actionPanel.numerator)/ _actionPanel.denumerator,1);
 		transformBar.offsetMax = Vector2.zero;
+		List<ActionPanelRessourceBehavior.RessourceInfo> infos = new List<ActionPanelRessourceBehavior.RessourceInfo>();
+		if (actionPanel.actionEffect.Length==0) {
+			return;
+		}
+		if (actionPanel.actionEffect [0] != 0) {
+			ActionPanelRessourceBehavior.RessourceInfo r;
+			r.quantity = actionPanel.actionEffect [0];
+			r.sprite = ConstantBoard.ressources ["Food"];
+			infos.Add (r);
+		}
+		if (actionPanel.actionEffect [1] != 0) {
+			ActionPanelRessourceBehavior.RessourceInfo r;
+			r.quantity = actionPanel.actionEffect [1];
+			r.sprite = ConstantBoard.ressources ["Metal"];
+			infos.Add (r);
+		}
+		if (actionPanel.actionEffect [2] != 0) {
+			ActionPanelRessourceBehavior.RessourceInfo r;
+			r.quantity = actionPanel.actionEffect [2];
+			r.sprite = ConstantBoard.ressources ["Cristal"];
+			infos.Add (r);
+		}
+		if (actionPanel.actionEffect [3] != 0) {
+			ActionPanelRessourceBehavior.RessourceInfo r;
+			r.quantity = actionPanel.actionEffect [3];
+			r.sprite = ConstantBoard.ressources ["Humain"];
+			infos.Add (r);
+		}
+		if (actionPanel.actionEffect [4] != 0) {
+			ActionPanelRessourceBehavior.RessourceInfo r;
+			r.quantity = actionPanel.actionEffect [4];
+			r.sprite = ConstantBoard.ressources ["Capsule"];
+			infos.Add (r);
+		}
+		ressourcesBehavior.Show(infos);
 	}
 }

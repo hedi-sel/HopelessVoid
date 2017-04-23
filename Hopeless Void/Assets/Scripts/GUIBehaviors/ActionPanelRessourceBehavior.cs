@@ -18,8 +18,14 @@ public class ActionPanelRessourceBehavior : MonoBehaviour {
 
 	public RessourcePlace[] places;
 
-	public void Show(RessourceInfo[] infos){
-		for (int i = 0; i < infos.Length; i++) {
+	public void Show(List<RessourceInfo> infos){
+		for (int i = 0; i < 3; i++) {
+			places [i].image.gameObject.SetActive (false);
+			places [i].text.gameObject.SetActive (false);
+		}
+		for (int i = 0; i < infos.Count; i++) {
+			places [i].image.gameObject.SetActive (true);
+			places [i].text.gameObject.SetActive (true);
 			places [i].image.sprite = infos [i].sprite;
 			places [i].text.text = (infos [i].quantity>0 ? "+" : "") + infos [i].quantity.ToString();
 		}
