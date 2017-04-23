@@ -50,6 +50,7 @@
      <Compile Include="Assets\Scripts\GUIBehaviors\ActionHolderBehavior.cs" />
      <Compile Include="Assets\Scripts\GUIBehaviors\ActionOptionPanelBehavior.cs" />
      <Compile Include="Assets\Scripts\GUIBehaviors\ActionPanelBehavior.cs" />
+     <Compile Include="Assets\Scripts\GUIBehaviors\ActionPanelRessourceBehavior.cs" />
      <Compile Include="Assets\Scripts\GUIBehaviors\BottomBarBehavior.cs" />
      <Compile Include="Assets\Scripts\GUIBehaviors\CapsuleBehavior.cs" />
      <Compile Include="Assets\Scripts\GUIBehaviors\EatenBehavior.cs" />

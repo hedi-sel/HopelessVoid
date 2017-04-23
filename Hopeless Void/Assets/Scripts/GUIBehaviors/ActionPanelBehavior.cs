@@ -21,6 +21,7 @@ public class ActionPanelBehavior : MonoBehaviour {
 	public Text textFraction;
 	public Image imageBackground;
 	public RectTransform transformBar;
+	public ActionPanelRessourceBehavior ressourcesBehavior;
 
 
 	public ActionPanel actionPanel;
