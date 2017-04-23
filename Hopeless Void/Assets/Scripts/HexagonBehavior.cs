@@ -182,7 +182,9 @@ public class HexagonBehavior : MonoBehaviour {
 		int i = 1;
 		foreach (BuildingAction possibleAction in ConstantBoard.BuildingActionList) {
 			if (possibleAction != action){
-				panelList [i] = toActionPanel (new Action(possibleAction,possibleAction == building));
+				panelList [i] = toActionPanel (
+					new Action(possibleAction,possibleAction == building || possibleAction == BuildingAction.ENERGY)
+				);
 				i++;
 			}
 		}
