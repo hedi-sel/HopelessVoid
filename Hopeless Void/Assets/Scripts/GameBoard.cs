@@ -29,11 +29,16 @@ public class GameBoard : MonoBehaviour {
 	private Direction[] directions = new Direction[6];
 
 	public Vector3 Ressources = new Vector3 (10, 0, 0);
+
+	public void commit() {
+
+	}
+		
 	//HexagonProperties
 
 	void Start () {
 		dirToVectInit ();
-		generateMap ( new Vector2(100,50) );
+		generateMap ( new Vector2(15,5) );
 		ConstantBoard.instance.HexagonPropertiesInit ();
 	}
 	
