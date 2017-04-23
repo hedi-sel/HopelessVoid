@@ -5,7 +5,7 @@ using UnityEngine;
 public class ConstantBoard : MonoBehaviour {
 	
 	public void  HexagonPropertiesInit (){
-		BuildingActionList = new BuildingAction[] { BuildingAction.IDLE, BuildingAction.NONE, BuildingAction.FACTORY, BuildingAction.FACTORY };
+		BuildingActionList = new BuildingAction[] { BuildingAction.IDLE, BuildingAction.NONE, BuildingAction.FACTORY};
 		//popMax
 		popMax.Add (BuildingAction.IDLE, 10);
 		popMax.Add (BuildingAction.NONE, 10);
