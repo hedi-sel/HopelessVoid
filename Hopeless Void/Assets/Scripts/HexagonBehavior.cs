@@ -47,6 +47,7 @@ public class HexagonBehavior : MonoBehaviour {
 	}
 
 	public bool commit() {
+		GUIHandler.instance.Close ();
 		if (action == BuildingAction.IDLE)
 			return true;
 		else if (action == BuildingAction.ENERGY) {
