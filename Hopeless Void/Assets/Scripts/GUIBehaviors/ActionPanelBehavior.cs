@@ -3,6 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
+public struct ActionPanel {
+	public string name;
+	public string action;
+	public int numerator;
+	public int denumerator;
+	public Sprite background;
+	public Action id;
+}
+
 public class ActionPanelBehavior : MonoBehaviour {
 
 	public Text textName;
@@ -11,14 +21,6 @@ public class ActionPanelBehavior : MonoBehaviour {
 	public Image imageBackground;
 	public RectTransform transformBar;
 
-	[System.Serializable]
-	public struct ActionPanel {
-		public string name;
-		public string action;
-		public int numerator;
-		public int denumerator;
-		public Sprite background;
-	}
 
 	public ActionPanel actionPanel;
 

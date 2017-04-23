@@ -38,10 +38,17 @@ public class ConstantBoard : MonoBehaviour {
 
 	public static Dictionary<BuildingAction,int> popMax = new Dictionary<BuildingAction,int> ();
 	public static Dictionary<BuildingAction,int> popAction = new Dictionary<BuildingAction,int> ();
-	public static Dictionary<BuildingAction,Vector3> effectAction = new Dictionary<BuildingAction,Vector3> ();
 	public static Dictionary<BuildingAction,int> popConstruction = new Dictionary<BuildingAction,int> ();
+
+	public static Dictionary<BuildingAction,Vector3> effectAction = new Dictionary<BuildingAction,Vector3> ();
 	public static Dictionary<BuildingAction,Vector3> effectConstruction = new Dictionary<BuildingAction,Vector3> ();
+
+	public static Dictionary<BuildingAction,string> nameAction = new Dictionary<BuildingAction,string> ();
+	public static Dictionary<BuildingAction,string> nameBuilding = new Dictionary<BuildingAction,string> ();
+	public static Dictionary<BuildingAction,string> idBuilding = new Dictionary<BuildingAction,string> ();
+
 	public static Dictionary<string,Sprite> sprites = new Dictionary<string,Sprite> ();
+	public static Dictionary<string,Sprite> backgrounds = new Dictionary<string,Sprite> ();
 
 
 
