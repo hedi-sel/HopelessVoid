@@ -34,13 +34,11 @@ public class HexagonBehavior : MonoBehaviour {
 		this.coordinates = c;
 		building = BuildingAction.NONE;
 		action = BuildingAction.NONE;
-		remainingWork = 0; 
 		populationOnHexagon = GetComponent<PopulationOnHexagonBehavior> ();
 	}
 
 	public void computeRessources(){
-		if (action == BuildingAction.NONE && !isFlat) GameBoard.instance.modifyParameters (remainingWork / ConstantBoard.popAction [action] 
-			, ConstantBoard.effectAction [BuildingAction.IDLE]); // IF harvesting a mountain
+		if (action == BuildingAction.NONE && !isFlat) GameBoard.instance.modifyParameters (ConstantBoard.effectAction [BuildingAction.IDLE]); // IF harvesting a mountain
 		else
 			GameBoard.instance.modifyParameters (remainingWork / ConstantBoard.popAction [action] 
 			, ConstantBoard.effectAction [action]);
@@ -52,7 +50,6 @@ public class HexagonBehavior : MonoBehaviour {
 			return true;
 		else if (action == BuildingAction.ENERGY) {
 			computeRessources ();
-			remainingWork = remainingWork % ConstantBoard.popAction [action];
 		}
 		else {
 			remainingWork += population;
