@@ -97,10 +97,12 @@ public class HexagonBehavior : MonoBehaviour {
 		return true;
 	}*/
 
+	public GameObject eaten;
+
 	public void collapse (){ // A modifier
 		GameBoard.instance.Parameters [3] -= population;
 		//Jouer l'animation
-		Destroy(gameObject);
+		GameObject g = Instantiate(eaten,transform);
 	}
 
 	public bool setAction(BuildingAction action){
