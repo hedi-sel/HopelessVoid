@@ -17,7 +17,6 @@ public class NextTurnBehavior : MonoBehaviour {
 		rect = GetComponent<RectTransform> ();
 		box = GetComponent<BoxCollider2D> ();
 		image = GetComponent<Image> ();
-		print (image);
 		SetAnimation (false);
 	}
 

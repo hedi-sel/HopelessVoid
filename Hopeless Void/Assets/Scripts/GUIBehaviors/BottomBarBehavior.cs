@@ -11,9 +11,7 @@ public class BottomBarBehavior : MonoBehaviour {
 	public int peopleMax;
 	public bool hovered;
 
-	public ActionPanelBehavior actionPanel;
-	private ActionPanel[] actions;
-	private int curAction;
+	private ActionHolderBehavior actionHolder;
 
 	[HideInInspector]
 	public HexagonBehavior hexagon;
@@ -21,13 +19,13 @@ public class BottomBarBehavior : MonoBehaviour {
 	public void Awake(){
 		rect = GetComponent<RectTransform> ();
 		box = GetComponent<BoxCollider2D> ();
+		actionHolder = GetComponentInChildren<ActionHolderBehavior> ();
 	}
 
 	public void Open(HexagonBehavior _hexagon){
 		hexagon = _hexagon;
-		actions = _hexagon.getActionPlanelList ();
-		curAction = 0;
-		actionPanel.SetActionPanel (actions [curAction]);
+		actionHolder.Close ();
+		actionHolder.SetActions( _hexagon.getActionPlanelList ());
 	}
 
 	public void Update(){

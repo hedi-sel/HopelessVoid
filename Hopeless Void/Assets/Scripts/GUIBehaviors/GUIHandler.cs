@@ -41,7 +41,7 @@ public class GUIHandler : MonoBehaviour {
 	void Update(){
 		if(Input.GetButtonDown ("Left Click")){
 			if (bottom.hovered) {
-				print ("Bottom");
+				//print ("Bottom");
 			} else if (highlighted != null && highlight.activeSelf) {
 				GUIHandler.instance.Open (highlighted);
 			}
