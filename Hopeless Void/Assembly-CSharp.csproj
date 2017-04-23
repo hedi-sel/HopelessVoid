@@ -48,7 +48,9 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\ConstantBoard.cs" />
      <Compile Include="Assets\Scripts\GUIBehaviors\ActionPanelBehavior.cs" />
+     <Compile Include="Assets\Scripts\GUIBehaviors\BottomBarBehavior.cs" />
      <Compile Include="Assets\Scripts\GUIBehaviors\CapsuleBehavior.cs" />
+     <Compile Include="Assets\Scripts\GUIBehaviors\GUIHandler.cs" />
      <Compile Include="Assets\Scripts\GUIBehaviors\HideBehavior.cs" />
      <Compile Include="Assets\Scripts\GUIBehaviors\PeopleArrowBehavior.cs" />
      <Compile Include="Assets\Scripts\GUIBehaviors\PeopleBarBehavior.cs" />

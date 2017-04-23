@@ -9,21 +9,20 @@ public class PeopleBarBehavior : MonoBehaviour {
 	public PeopleArrowBehavior right;
 	public Text fraction;
 
-	public int numerator;
-	public int denumerator;
+	private BottomBarBehavior bar;
 
 	void Awake() {
 		left.SetBar (this);
 		right.SetBar (this);
+
+		bar = GetComponentInParent<BottomBarBehavior> ();
 	}
 
-	void Refresh() {
+	public void Refresh(int numerator, int denumerator) {
 		if (numerator <= 0) {
-			numerator = 0;
 			right.gameObject.SetActive (true);
 			left.gameObject.SetActive (false);
 		} else if (numerator >= denumerator) {
-			numerator = denumerator;
 			right.gameObject.SetActive (false);
 			left.gameObject.SetActive (true);
 		} else {
@@ -34,7 +33,6 @@ public class PeopleBarBehavior : MonoBehaviour {
 	}
 
 	public void Mod(int i) {
-		numerator = numerator + i;
-		Refresh ();
+		bar.Mod (i);
 	}
 }

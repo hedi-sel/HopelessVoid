@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class HideBehavior : MonoBehaviour {
-	//private GUIBehavior;
 
 	new public Sprite light;
 	public Sprite dark;
@@ -48,6 +47,6 @@ public class HideBehavior : MonoBehaviour {
 	}
 
 	void Pushed(){
-		//ACTION
+		GUIHandler.instance.Close ();
 	}
 }
