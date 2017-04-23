@@ -29,6 +29,7 @@ public class HexagonBehavior : MonoBehaviour {
 		selfRenderer.sprite = sprite;
 		this.coordinates = c;
 		building = BuildingAction.NONE;
+		action = BuildingAction.NONE;
 		remainingWork = 0; 
 	}
 
@@ -103,10 +104,12 @@ public class HexagonBehavior : MonoBehaviour {
 	public ActionPanel toActionPanel (Action action){
 		ActionPanel panel = new ActionPanel ();
 		panel.name = ConstantBoard.nameBuilding [building];
-		panel.action = (action.isAction) ? ConstantBoard.nameAction [action.action] : "Build "+ConstantBoard.nameBuilding [action.action];
+		panel.action = (action.isAction) ? ConstantBoard.nameAction [action.action] :
+			("Build "+ConstantBoard.nameBuilding [action.action]);
 		panel.numerator = remainingWork;
 		panel.denumerator = (action.isAction) ? ConstantBoard.popAction [action.action] : ConstantBoard.popConstruction [action.action];
 		panel.id = action;
+		Debug.Log (ConstantBoard.idBuilding [action.action]);
 		panel.background = ConstantBoard.backgrounds [ ConstantBoard.idBuilding[action.action] ];
 		return panel;
 	}
