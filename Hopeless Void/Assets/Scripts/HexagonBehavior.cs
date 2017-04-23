@@ -118,7 +118,7 @@ public class HexagonBehavior : MonoBehaviour {
 					GameBoard.instance.modifyParameters (ConstantBoard.effectConstruction [action]);
 					popMax = ConstantBoard.popConstruction [action];
 					GUIHandler.instance.Close ();
-					selfRenderer.sprite = ConstantBoard.sprites 
+					buildingRenderer.sprite = ConstantBoard.sprites 
 						[ConstantBoard.idBuilding[action]];
 				}else {
 					return false;

@@ -31,6 +31,7 @@ public class GUIHandler : MonoBehaviour {
 	private HexagonBehavior highlighted;
 
 	void Start(){
+		GetComponent<Canvas> ().worldCamera = GameHandler.instance.GetComponent<Camera>();
 		Transform here = GameBoard.instance.transform;
 		outline = Instantiate (hexagon, here);
 		outline.GetComponent<SpriteRenderer> ().sprite = outlineSprite;
