@@ -85,14 +85,11 @@ public class HexagonBehavior : MonoBehaviour {
 	}
 
 	void OnMouseEnter() {
-		//GUIHandler.instance.Highlight(this.transform.position);
+		GUIHandler.instance.Highlight (this);
 
 	}
-	void OnMouseOver() {
-		Input.GetButtonDown ("Left Click");
-		//GuiHandler.instance.SelectMe(this);
-	}
+
 	void OnMouseExit() {
-		//GUIHandler.instance.UnHighlight();
+		GUIHandler.instance.UnHighlight (this);
 	}
 }
