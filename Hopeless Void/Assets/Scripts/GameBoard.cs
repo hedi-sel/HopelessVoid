@@ -6,6 +6,11 @@ using UnityEngine;
 public struct Action {
 	public BuildingAction action;
 	public bool isAction;
+
+	public Action(BuildingAction action, bool isAction){
+		this.action = action;
+		this.isAction = isAction;
+	}
 }
 
 public class GameBoard : MonoBehaviour {
