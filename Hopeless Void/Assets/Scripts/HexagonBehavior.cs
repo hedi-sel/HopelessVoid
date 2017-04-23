@@ -34,25 +34,29 @@ public class HexagonBehavior : MonoBehaviour {
 	}
 
 	public void computeRessources(){
+		Debug.Log (remainingWork / ConstantBoard.popAction [action]);
 		GameBoard.instance.modifyParameters (remainingWork / ConstantBoard.popAction [action] 
 			, ConstantBoard.effectAction [action]);
-		Debug.Log ("Not enough ressources");
 	}
 
 	public bool commit() {
-		remainingWork += population;
-		//setAction (selectedAction);
-		if (action == building) {
-			computeRessources ();
-			remainingWork = remainingWork % ConstantBoard.popAction [action];
-		} else {				
-			if (remainingWork >= ConstantBoard.popConstruction[action]) {
-				remainingWork = 0;
-				building = action;
-				selfRenderer.sprite = ConstantBoard.sprites[action.ToString()];
+		if (action == BuildingAction.IDLE)
+			return true;
+		else {
+			remainingWork += population;
+			//setAction (selectedAction);
+			if (action == building) {
+				computeRessources ();
+				remainingWork = remainingWork % ConstantBoard.popAction [action];
+			} else {				
+				if (remainingWork >= ConstantBoard.popConstruction [action]) {
+					remainingWork = 0;
+					building = action;
+					selfRenderer.sprite = ConstantBoard.sprites [action.ToString ()];
+				}
 			}
+			return action == building;
 		}
-		return action == building;
 	}
 
 	public bool addPopulation(int addPop){
@@ -104,13 +108,18 @@ public class HexagonBehavior : MonoBehaviour {
 	public ActionPanel toActionPanel (Action action){
 		ActionPanel panel = new ActionPanel ();
 		panel.name = ConstantBoard.nameBuilding [building];
-		panel.action = (action.isAction) ? ConstantBoard.nameAction [action.action] :
-			("Build "+ConstantBoard.nameBuilding [action.action]);
-		panel.numerator = remainingWork;
-		panel.denumerator = (action.isAction) ? ConstantBoard.popAction [action.action] : ConstantBoard.popConstruction [action.action];
+		if (action.action == BuildingAction.IDLE) {
+			panel.action = "Nothing";
+			panel.background = ConstantBoard.backgrounds [ConstantBoard.idBuilding [building]];
+		} else {
+			panel.action = (action.isAction) ? ConstantBoard.nameAction [action.action] :
+			("Build " + ConstantBoard.nameBuilding [action.action]);
+			panel.background = ConstantBoard.backgrounds [ConstantBoard.idBuilding [action.action]];
+		}
 		panel.id = action;
-		Debug.Log (ConstantBoard.idBuilding [action.action]);
-		panel.background = ConstantBoard.backgrounds [ ConstantBoard.idBuilding[action.action] ];
+		panel.denumerator = (action.isAction) ? ConstantBoard.popAction [action.action] : ConstantBoard.popConstruction [action.action];
+		panel.numerator = remainingWork;
+
 		return panel;
 	}
 
@@ -125,8 +134,6 @@ public class HexagonBehavior : MonoBehaviour {
 				panelList [i] = toActionPanel (new Action(possibleAction,possibleAction == building));
 				i++;
 			}
-			if (i != ConstantBoard.BuildingActionList.Length)
-				Debug.Log ("Caca au niveau de getActionPanelList");
 		}
 		remainingWork = memory;
 		return panelList;
