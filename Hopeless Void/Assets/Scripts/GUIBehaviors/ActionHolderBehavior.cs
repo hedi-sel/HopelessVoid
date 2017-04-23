@@ -83,9 +83,6 @@ public class ActionHolderBehavior : MonoBehaviour {
 	}
 
 	public void GotClicked(int id){
-		print (actions [id]);
-		print (actions [id].id);
-		print (actions [id].id.action);
 		if (bottom.hexagon.setAction(actions[id].id.action)) {
 			curAction = id;
 			Close ();

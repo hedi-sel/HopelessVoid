@@ -60,39 +60,45 @@ public class GameBoard : MonoBehaviour {
 		GUIHandler.instance.top.SetCapsule (Parameters[4], maxCapsule);
 	}
 	public void commit() {
+		
+		if (map.Count == 1 || Parameters[3]<1 ){
+			GameHandler.instance.SetState ("MenuScene");
+		}
+
 		HexagonBehavior[] hexagons = new HexagonBehavior[map.Count];
 		map.Values.CopyTo (hexagons, 0);
 
 		foreach (HexagonBehavior hex in map.Values) {
 			hex.commit ();
 		}
+
 		HexagonBehavior hexagon = hexagons[0];
+		while (!destructible(hexagon)) {
+			hexagon = hexagons [Random.Range (0, map.Count)];
+		}
+		map.Remove (hexagon.coordinates);
+		hexagon.collapse ();
+
+		hexagon = hexagons[0];
 
 		int food = Parameters [0];
 		if (food < Parameters [3]) {
 			Parameters [0] = 0;
 			Parameters [3] = food;
 			//Procédure de tuage de gens qui meurent de faim
-			//while (occupiedPopulation < 0) {
+			while (occupiedPopulation > Parameters[3]) {
 				hexagon = hexagons [Random.Range (0, map.Count)];
-			//}
+				hexagon.addPopulation (-1);
+			}
 			
 		} else
 			Parameters [0] = food - Parameters [3];
-
-		Debug.Log (food + " " + Parameters [0] + " " + Parameters [3]);
-		//Destroy tuile
-		if (map.Count == 1 || Parameters[3]<1 ){
-			GameHandler.instance.SetState ("MenuScene");
-		}
-
-		hexagon = hexagons[0];
-		while (!destructible(hexagon)) {
-			hexagon = hexagons [Random.Range (0, map.Count)];
-		}
-		map.Remove (hexagon.coordinates);
-		hexagon.collapse ();
+		
 		updateInterfaceParameters ();
+
+		//Destroy tuile
+
+
 	}
 		
 	//HexagonProperties
@@ -101,6 +107,7 @@ public class GameBoard : MonoBehaviour {
 		dirToVectInit ();
 		generateMap ( new Vector2(15,5) );
 		ConstantBoard.instance.HexagonPropertiesInit ();
+
 	}
 
 	private float currentScale=0.5f;
@@ -134,8 +141,8 @@ public class GameBoard : MonoBehaviour {
 		
 
 	private bool destructible (HexagonBehavior hex){
-		if (hex.coordinates == new Vector2(0,0) )
-			return false;
+		/*if (hex.coordinates == new Vector2(0,0) )
+			return false;*/
 		if (getNeighbors (hex).Count > 3)
 			return false;
 		return constructible (hex.coordinates);
