@@ -15,6 +15,7 @@ public class BottomBarBehavior : MonoBehaviour {
 	private ActionPanel[] actions;
 	private int curAction;
 
+	[HideInInspector]
 	public HexagonBehavior hexagon;
 
 	public void Awake(){
