@@ -20,14 +20,14 @@ public class ConstantBoard : MonoBehaviour {
 		popConstruction.Add (BuildingAction.FACTORY, 5);
 		popConstruction.Add (BuildingAction.CAPITALE, 0);
 		//effectAction
-		effectAction.Add (BuildingAction.IDLE, new Vector3 (0, 0, 0));
-		effectAction.Add (BuildingAction.NONE, new Vector3 (5, 5, 0));
-		effectAction.Add (BuildingAction.FACTORY, new Vector3 (0, -5, 10));
-		effectAction.Add (BuildingAction.CAPITALE, new Vector3 (0, 0, 0));
+		effectAction.Add (BuildingAction.IDLE, new int[] {0, 0, 0, 0, 0});
+		effectAction.Add (BuildingAction.NONE, new int[] {5, 5, 0, 0, 0});
+		effectAction.Add (BuildingAction.FACTORY, new int[] {0, -5, 10, 0, 0});
+		effectAction.Add (BuildingAction.CAPITALE, new int[] {0, 0, 0, 0, 0});
 		//effectConstruction
-		effectConstruction.Add (BuildingAction.NONE, new Vector3 (0, 10, 0));
-		effectConstruction.Add (BuildingAction.FACTORY, new Vector3 (0, -20, 0));
-		effectConstruction.Add (BuildingAction.CAPITALE, new Vector3 (0, 0, 0));
+		effectConstruction.Add (BuildingAction.NONE, new int[] {0, 10, 0, 0, 0});
+		effectConstruction.Add (BuildingAction.FACTORY, new int[] {0, -20, 0, 0, 0});
+		effectConstruction.Add (BuildingAction.CAPITALE, new int[] {0, 0, 0, 0, 0});
 		//sprites
 		foreach (Sprite sprite in buildingSprites) {
 			sprites.Add (sprite.name, sprite);
@@ -35,6 +35,19 @@ public class ConstantBoard : MonoBehaviour {
 		foreach (Sprite sprite in backgroundSprites) {
 			backgrounds.Add (sprite.name, sprite);
 		}
+		//Nom des actions
+		nameAction.Add(BuildingAction.IDLE,"Nothing");
+		nameAction.Add(BuildingAction.NONE,"Harvesting");
+		nameAction.Add(BuildingAction.FACTORY,"Working");
+		//Nom des batiments
+		nameBuilding.Add(BuildingAction.NONE,"Plaine");
+		nameBuilding.Add(BuildingAction.FACTORY,"Working");
+		nameBuilding.Add(BuildingAction.CAPITALE,"Working");
+		//ID des sprites de batiments
+		idBuilding.Add(BuildingAction.NONE,"Plaine1");
+		idBuilding.Add(BuildingAction.FACTORY,"Metal");
+		idBuilding.Add(BuildingAction.CAPITALE,"Capitale");
+
 	}
 
 
@@ -47,8 +60,8 @@ public class ConstantBoard : MonoBehaviour {
 	public static Dictionary<BuildingAction,int> popAction = new Dictionary<BuildingAction,int> ();
 	public static Dictionary<BuildingAction,int> popConstruction = new Dictionary<BuildingAction,int> ();
 
-	public static Dictionary<BuildingAction,Vector3> effectAction = new Dictionary<BuildingAction,Vector3> ();
-	public static Dictionary<BuildingAction,Vector3> effectConstruction = new Dictionary<BuildingAction,Vector3> ();
+	public static Dictionary<BuildingAction,int[]> effectAction = new Dictionary<BuildingAction,int[]> ();
+	public static Dictionary<BuildingAction,int[]> effectConstruction = new Dictionary<BuildingAction,int[]> ();
 
 	public static Dictionary<BuildingAction,string> nameAction = new Dictionary<BuildingAction,string> ();
 	public static Dictionary<BuildingAction,string> nameBuilding = new Dictionary<BuildingAction,string> ();

@@ -33,7 +33,8 @@ public class HexagonBehavior : MonoBehaviour {
 	}
 
 	public void computeRessources(){
-		GameBoard.instance.Ressources += (remainingWork / ConstantBoard.popAction [action]) * ConstantBoard.effectAction [action];
+		GameBoard.instance.modifyParameters (remainingWork / ConstantBoard.popAction [action] 
+			, ConstantBoard.effectAction [action]);
 		Debug.Log ("Not enough ressources");
 	}
 
@@ -82,9 +83,9 @@ public class HexagonBehavior : MonoBehaviour {
 	}*/
 
 	public bool setAction(BuildingAction action){
-		if (action != building && isPositif(-ConstantBoard.effectConstruction [action] - GameBoard.instance.Ressources))
+		if ( action != building && isSuperior(GameBoard.instance.Parameters , ConstantBoard.effectConstruction [action] ) )
 			return false;
-		if (action == building && isPositif(-ConstantBoard.effectConstruction [action] - GameBoard.instance.Ressources))
+		if ( action == building && isSuperior(GameBoard.instance.Parameters , ConstantBoard.effectConstruction [action] ) )
 			return false;
 		if (action != building)
 			remainingWork = 0;
@@ -92,8 +93,11 @@ public class HexagonBehavior : MonoBehaviour {
 		return true;
 	}
 
-	public bool isPositif(Vector3 v){
-		return v.x > 0 && v.y > 0 && v.z > 0;
+	public bool isSuperior(int[] l1, int[] l2){
+		bool superior = true;
+		for (int i = 0; i < l1.Length; i++)
+			superior = superior && (l1 [i] > l2 [i]);
+		return superior;
 	}
 
 	public ActionPanel toActionPanel (Action action){

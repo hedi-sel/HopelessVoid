@@ -39,9 +39,18 @@ public class GameBoard : MonoBehaviour {
 	private Vector2[] directionsVector2 = new Vector2[6];	
 	private Direction[] directions = new Direction[6];
 
-	public Vector3 Ressources = new Vector3 (10, 0, 0);
+	public int[] Parameters;  //food, metal, energy, population, capsule
+	public void modifyParameters (int a, int[] modif){
+		for (int i = 0; i < Parameters.Length; i++) {
+			Parameters [i] += a*modif [i];
+		}
+	}
+
 
 	public void commit() {
+		foreach (HexagonBehavior hexagon in map.Values) {
+			hexagon.commit ();
+		}
 
 	}
 		
