@@ -29,7 +29,7 @@ public class BottomBarBehavior : MonoBehaviour {
 	public void Open(HexagonBehavior _hexagon){
 		hexagon = _hexagon;
 		peopleMax = hexagon.getMaxPopulation ();
-		people.Refresh (hexagon.population, peopleMax);
+		Refresh ();
 		actionHolder.Close ();
 		actionHolder.SetActions( _hexagon.getActionPlanelList ());
 	}
@@ -48,6 +48,11 @@ public class BottomBarBehavior : MonoBehaviour {
 
 	public void Mod (int i){
 		bool t = hexagon.addPopulation(i);
+		Refresh ();
+	}
+
+	private void Refresh(){
 		people.Refresh (hexagon.population, peopleMax);
+		hexagon.populationOnHexagon.SetPeople (hexagon.population);
 	}
 }

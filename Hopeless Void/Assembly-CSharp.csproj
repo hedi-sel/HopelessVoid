@@ -69,6 +69,7 @@
      <Compile Include="Assets\Scripts\MenuBehaviors\NavActionStartBehavior.cs" />
      <Compile Include="Assets\Scripts\MenuBehaviors\NavButtonBehavior.cs" />
      <Compile Include="Assets\Scripts\MenuState.cs" />
+     <Compile Include="Assets\Scripts\PopulationOnHexagonBehavior.cs" />
      <Compile Include="Assets\Scripts\SoundHandler.cs" />
      <Compile Include="Assets\Scripts\State.cs" />
  <Reference Include="UnityEngine.UI">

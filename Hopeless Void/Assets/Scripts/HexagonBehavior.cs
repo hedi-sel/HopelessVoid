@@ -24,6 +24,8 @@ public class HexagonBehavior : MonoBehaviour {
 	public int remainingWork;
 	public int locked;
 
+	public PopulationOnHexagonBehavior populationOnHexagon;
+
 	public void HexagonInitialize(bool isFlat, Sprite sprite, Vector2 c){
 		this.isFlat = isFlat;
 		selfRenderer.sprite = sprite;
@@ -31,6 +33,7 @@ public class HexagonBehavior : MonoBehaviour {
 		building = BuildingAction.NONE;
 		action = BuildingAction.NONE;
 		remainingWork = 0; 
+		populationOnHexagon = GetComponent<PopulationOnHexagonBehavior> ();
 	}
 
 	public void computeRessources(){
