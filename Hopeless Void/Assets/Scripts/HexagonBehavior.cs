@@ -98,15 +98,18 @@ public class HexagonBehavior : MonoBehaviour {
 	}
 
 	public bool setAction(BuildingAction action){
-		if (action != building)
-		if (  isSuperior( GameBoard.instance.Parameters, neg(ConstantBoard.effectConstruction [action]) )  )
-			return false;
-		else
-			GameBoard.instance.modifyParameters (ConstantBoard.effectConstruction [action]);
-		if ( action == building && isSuperior(GameBoard.instance.Parameters , ConstantBoard.effectConstruction [action] ) )
-			return false;
-		if (action != building)
-			remainingWork = 0;
+		if (action != BuildingAction.IDLE) {
+			if (action != building) {
+				if (isSuperior (GameBoard.instance.Parameters, neg (ConstantBoard.effectConstruction [action])))
+					return false;
+				else {
+					GameBoard.instance.modifyParameters (ConstantBoard.effectConstruction [action]);
+					remainingWork = 0;
+				}
+			}
+			if (action == building && isSuperior (GameBoard.instance.Parameters, ConstantBoard.effectConstruction [action]))
+				return false;
+		}
 		this.action = action;
 		return true;
 	}
