@@ -52,6 +52,8 @@ public class ConstantBoard : MonoBehaviour {
 		idBuilding.Add(BuildingAction.FACTORY,"Metal");
 		idBuilding.Add(BuildingAction.CAPITALE,"Crystal");
 
+		GameBoard.instance.updateInterfaceParameters ();
+
 	}
 
 

@@ -60,21 +60,37 @@ public class GameBoard : MonoBehaviour {
 		GUIHandler.instance.top.SetCapsule (Parameters[4], maxCapsule);
 	}
 	public void commit() {
+		HexagonBehavior[] hexagons = new HexagonBehavior[map.Count];
+		map.Values.CopyTo (hexagons, 0);
+
 		foreach (HexagonBehavior hex in map.Values) {
 			hex.commit ();
 		}
-		int food = Parameters [0];
-		if (food < Parameters [3]) {//Print Population died
-		}
-		Parameters [0] = (food >= Parameters [3])? (food - Parameters [3]) : 0;
-		Parameters [3] = (food >= Parameters [3])? Parameters [3] : food;
-		//Destroy tuile
-		HexagonBehavior[] hexagons = new HexagonBehavior[map.Count];
-		map.Values.CopyTo (hexagons, 0);
 		HexagonBehavior hexagon = hexagons[0];
+
+		int food = Parameters [0];
+		if (food < Parameters [3]) {
+			Parameters [0] = 0;
+			Parameters [3] = food;
+			//Procédure de tuage de gens qui meurent de faim
+			//while (occupiedPopulation < 0) {
+				hexagon = hexagons [Random.Range (0, map.Count)];
+			//}
+			
+		} else
+			Parameters [0] = food - Parameters [3];
+
+		Debug.Log (food + " " + Parameters [0] + " " + Parameters [3]);
+		//Destroy tuile
+		if (map.Count == 1 || Parameters[3]<1 ){
+			GameHandler.instance.SetState ("MenuScene");
+		}
+
+		hexagon = hexagons[0];
 		while (!destructible(hexagon)) {
 			hexagon = hexagons [Random.Range (0, map.Count)];
 		}
+		map.Remove (hexagon.coordinates);
 		hexagon.collapse ();
 		updateInterfaceParameters ();
 	}
