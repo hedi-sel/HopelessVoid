@@ -22,7 +22,7 @@ public class HexagonBehavior : MonoBehaviour {
 
 
 	public int population;
-	public int remainingWork;
+	public int popMax;
 	public int locked;
 
 	[HideInInspector]
@@ -40,8 +40,7 @@ public class HexagonBehavior : MonoBehaviour {
 	public void computeRessources(){
 		if (action == BuildingAction.NONE && !isFlat) GameBoard.instance.modifyParameters (ConstantBoard.effectAction [BuildingAction.IDLE]); // IF harvesting a mountain
 		else
-			GameBoard.instance.modifyParameters (remainingWork / ConstantBoard.popAction [action] 
-			, ConstantBoard.effectAction [action]);
+			GameBoard.instance.modifyParameters ( ConstantBoard.effectAction [action]);
 	}
 
 	public bool commit() {
@@ -52,17 +51,15 @@ public class HexagonBehavior : MonoBehaviour {
 			computeRessources ();
 		}
 		else {
-			remainingWork += population;
-			//setAction (selectedAction);
-			if (action == building) {
-				computeRessources ();
-				remainingWork = remainingWork % ConstantBoard.popAction [action];
-			} else {				
-				if (remainingWork >= ConstantBoard.popConstruction [action]) {
-					remainingWork = 0;
+			if (population == popMax) {
+				//setAction (selectedAction);
+				if (action == building) {
+					computeRessources ();
+				} else {				
 					building = action;
 					selfRenderer.sprite = ConstantBoard.sprites [action.ToString ()];
 				}
+
 			}
 		}
 		return true;
@@ -115,7 +112,7 @@ public class HexagonBehavior : MonoBehaviour {
 			if (action != building) {
 				if (isSuperior (GameBoard.instance.Parameters, neg (ConstantBoard.effectConstruction [action]))) {
 					GameBoard.instance.modifyParameters (ConstantBoard.effectConstruction [action]);
-					remainingWork = 0;
+					popMax = ConstantBoard.popConstruction [action];
 				}else {
 					return false;
 				}
@@ -168,7 +165,7 @@ public class HexagonBehavior : MonoBehaviour {
 		}
 		panel.id = action;
 		panel.denumerator = (action.isAction) ? ConstantBoard.popAction [action.action] : ConstantBoard.popConstruction [action.action];
-		panel.numerator = remainingWork;
+		panel.numerator = 0;
 		panel.actionEffect = (action.isAction) ? ConstantBoard.effectAction [action.action] :
 			ConstantBoard.effectConstruction [action.action];
 
@@ -179,8 +176,6 @@ public class HexagonBehavior : MonoBehaviour {
 		ActionPanel[] panelList = new ActionPanel[ConstantBoard.BuildingActionList.Length 
 			+ ( (GameBoard.instance.destructible(this) )?1 : 0)];
 		panelList [0] = toActionPanel( new Action(action,action == building) );
-		int memory = remainingWork;
-		remainingWork = 0;
 		int i = 1;
 		foreach (BuildingAction possibleAction in ConstantBoard.BuildingActionList) {
 			if (possibleAction != action){
@@ -193,7 +188,6 @@ public class HexagonBehavior : MonoBehaviour {
 		if (GameBoard.instance.destructible(this) ) 
 			panelList [ConstantBoard.BuildingActionList.Length] = 
 				toActionPanel ( new Action(BuildingAction.ENERGY,true) );
-		remainingWork = memory;
 		return panelList;
 			
 	}
