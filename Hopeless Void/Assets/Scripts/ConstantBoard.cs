@@ -16,6 +16,7 @@ public class ConstantBoard : MonoBehaviour {
 		popAction.Add (BuildingAction.FACTORY, 5);
 		popAction.Add (BuildingAction.CAPITALE, 0);
 		//popConstruction
+		popConstruction.Add (BuildingAction.IDLE, 0);
 		popConstruction.Add (BuildingAction.NONE, 2);
 		popConstruction.Add (BuildingAction.FACTORY, 5);
 		popConstruction.Add (BuildingAction.CAPITALE, 0);
@@ -40,13 +41,15 @@ public class ConstantBoard : MonoBehaviour {
 		nameAction.Add(BuildingAction.NONE,"Harvesting");
 		nameAction.Add(BuildingAction.FACTORY,"Working");
 		//Nom des batiments
+		nameBuilding.Add(BuildingAction.IDLE,"Mountain");
 		nameBuilding.Add(BuildingAction.NONE,"Plaine");
 		nameBuilding.Add(BuildingAction.FACTORY,"Working");
 		nameBuilding.Add(BuildingAction.CAPITALE,"Working");
 		//ID des sprites de batiments
-		idBuilding.Add(BuildingAction.NONE,"Plaine1");
+		idBuilding.Add(BuildingAction.IDLE,"Food");
+		idBuilding.Add(BuildingAction.NONE,"Food");
 		idBuilding.Add(BuildingAction.FACTORY,"Metal");
-		idBuilding.Add(BuildingAction.CAPITALE,"Capitale");
+		idBuilding.Add(BuildingAction.CAPITALE,"Crystal");
 
 	}
 
