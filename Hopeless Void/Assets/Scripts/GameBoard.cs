@@ -96,7 +96,7 @@ public class GameBoard : MonoBehaviour {
 
 
 		updateInterfaceParameters ();
-
+		//Verifier si les hexagones
 		//Destroy tuile
 
 

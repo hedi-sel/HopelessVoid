@@ -20,6 +20,8 @@ public class HexagonBehavior : MonoBehaviour {
 	public BuildingAction building;
 	public BuildingAction action;
 
+	public SpriteRenderer buildingRenderer;
+	public SpriteRenderer effectRenderer;
 
 	public int population;
 	public int popMax;
@@ -59,7 +61,7 @@ public class HexagonBehavior : MonoBehaviour {
 				} else {				
 					building = action;
 					popMax = ConstantBoard.popAction [building];
-					selfRenderer.sprite = ConstantBoard.sprites 
+					buildingRenderer.sprite = ConstantBoard.sprites 
 						[ConstantBoard.idBuilding[action]];
 				}
 
