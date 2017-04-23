@@ -34,7 +34,6 @@ public class HexagonBehavior : MonoBehaviour {
 	}
 
 	public void computeRessources(){
-		Debug.Log (remainingWork / ConstantBoard.popAction [action]);
 		if (action == BuildingAction.NONE && !isFlat) GameBoard.instance.modifyParameters (remainingWork / ConstantBoard.popAction [action] 
 			, ConstantBoard.effectAction [BuildingAction.IDLE]); // IF harvesting a mountain
 		else
@@ -92,15 +91,18 @@ public class HexagonBehavior : MonoBehaviour {
 		return true;
 	}*/
 
-	public void destroy (){ // A modifier
+	public void collapse (){ // A modifier
 		GameBoard.instance.Parameters [3] -= population;
 		//Jouer l'animation
-		this.destroy ();
+		Destroy(gameObject);
 	}
 
 	public bool setAction(BuildingAction action){
-		if ( action != building && isSuperior(GameBoard.instance.Parameters , ConstantBoard.effectConstruction [action] ) )
+		if (action != building)
+		if (  isSuperior( GameBoard.instance.Parameters, neg(ConstantBoard.effectConstruction [action]) )  )
 			return false;
+		else
+			GameBoard.instance.modifyParameters (ConstantBoard.effectConstruction [action]);
 		if ( action == building && isSuperior(GameBoard.instance.Parameters , ConstantBoard.effectConstruction [action] ) )
 			return false;
 		if (action != building)
@@ -115,6 +117,12 @@ public class HexagonBehavior : MonoBehaviour {
 		for (int i = 0; i < l1.Length; i++)
 			superior = superior && (l1 [i] > l2 [i]);
 		return superior;
+	}
+	public int[] neg(int[] l){
+		int[] negL = new int[l.Length];
+		for (int i = 0; i < l.Length; i++)
+			negL[i] = -l[i];
+		return negL;
 	}
 
 	public ActionPanel toActionPanel (Action action){

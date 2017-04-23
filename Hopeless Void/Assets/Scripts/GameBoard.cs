@@ -43,6 +43,9 @@ public class GameBoard : MonoBehaviour {
 	public int maxCapsule;
 	public int occupiedPopulation;
 
+	public void modifyParameters (int[] modif){
+		modifyParameters (1, modif);
+	}
 	public void modifyParameters (int a, int[] modif){
 		for (int i = 0; i < Parameters.Length; i++) {
 			Parameters [i] += a*modif [i];
@@ -72,7 +75,7 @@ public class GameBoard : MonoBehaviour {
 		while (!destructible(hexagon)) {
 			hexagon = hexagons [Random.Range (0, map.Count)];
 		}
-		hexagon.destroy ();
+		hexagon.collapse ();
 		updateInterfaceParameters ();
 	}
 		
