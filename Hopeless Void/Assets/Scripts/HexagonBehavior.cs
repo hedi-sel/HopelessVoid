@@ -57,7 +57,6 @@ public class HexagonBehavior : MonoBehaviour {
 				building = action;
 				popMax = ConstantBoard.popAction [building];
 				buildingRenderer.sprite = ConstantBoard.sprites [ConstantBoard.idBuilding [BuildingAction.CAPITALE]];
-				GUIHandler.instance.ChangeOn (this);
 			}
 
 		}
@@ -66,7 +65,7 @@ public class HexagonBehavior : MonoBehaviour {
 		}
 
 		GameBoard.instance.updateInterfaceParameters ();
-
+		GUIHandler.instance.ChangeOn (this);
 		return true;
 	}
 	
