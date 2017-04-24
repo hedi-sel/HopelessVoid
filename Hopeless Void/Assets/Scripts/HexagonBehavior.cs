@@ -57,7 +57,7 @@ public class HexagonBehavior : MonoBehaviour {
 				building = action;
 				popMax = ConstantBoard.popAction [building];
 				buildingRenderer.sprite = ConstantBoard.sprites [ConstantBoard.idBuilding [BuildingAction.CAPITALE]];
-
+				GUIHandler.instance.ChangeOn (this);
 			}
 
 		}
