@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class SoundHandler : MonoBehaviour {
 
+	static private SoundHandler m_Instance;
+	static public SoundHandler instance { get { return m_Instance; } }
+
 	// Use this for initialization
 	public Dictionary<string,AudioClip> musics = new Dictionary<string,AudioClip>();
 	public Dictionary<string,AudioClip> sounds = new Dictionary<string,AudioClip>();
@@ -22,6 +25,11 @@ public class SoundHandler : MonoBehaviour {
 		foreach(AudioClip audioClip in sons){
 			sounds.Add (audioClip.name, audioClip);
 		}
+		if (m_Instance != null) {
+			Destroy (this);
+		} else {
+			m_Instance = this;
+		}
 	}
 	
 	// Update is called once per frame
@@ -35,7 +43,9 @@ public class SoundHandler : MonoBehaviour {
 	}
 
 	public void playSound (string name){
-		soundPlayers [currentSound].PlayOneShot (sounds[name]);
+		soundPlayers [currentSound].clip = sounds[name];
+		soundPlayers [currentSound].Play ();
+		//soundPlayers [currentSound].PlayOneShot (sounds[name]);
 		currentSound = (currentSound + 1) % NUMBER_SOUNDS;
 	}
 }

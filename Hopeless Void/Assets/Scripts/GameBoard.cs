@@ -40,6 +40,7 @@ public class GameBoard : MonoBehaviour {
 	private Dictionary<Direction,Vector2> dirToVect = new Dictionary<Direction,Vector2>();
 	private Vector2[] directionsVector2 = new Vector2[6];	
 	private Direction[] directions = new Direction[6];
+	private int turnCounter = 0;
 
 	public int[] Parameters;  //food, metal, energy, population, capsule
 	public int maxCapsule;
@@ -65,6 +66,12 @@ public class GameBoard : MonoBehaviour {
 	public Sprite voidSprite;
 
 	public void commit() {
+		turnCounter++;
+		if (turnCounter == ConstantBoard.instance.musicChange [0]) {//Play musique milieu
+			SoundHandler.instance.playMusic ("milieu" + Random.Range (0, 3));
+		} else if (turnCounter == ConstantBoard.instance.musicChange [1]) {
+			SoundHandler.instance.playMusic ("fin" + Random.Range (0, 2));
+		}
 		HexagonBehavior[] hexagons = new HexagonBehavior[map.Count];
 		map.Values.CopyTo (hexagons, 0);
 
@@ -88,7 +95,6 @@ public class GameBoard : MonoBehaviour {
 			Parameters [3] = food;
 			//Procédure de tuage de gens qui meurent de faim
 			while (occupiedPopulation > Parameters[3]) { 
-				print ("hi");
 				hexagon = hexagons [Random.Range (0, map.Count)];
 				if (hexagon.population > 0) {
 					hexagon.population -= 1;
@@ -132,6 +138,7 @@ public class GameBoard : MonoBehaviour {
 	//HexagonProperties
 
 	void Start () {
+		SoundHandler.instance.playMusic ("debut" + Random.Range (0, 2));
 		dirToVectInit ();
 		ConstantBoard.instance.HexagonPropertiesInit ();
 		generateMap ( ConstantBoard.instance.worldSize );

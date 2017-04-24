@@ -109,16 +109,23 @@ public class HexagonBehavior : MonoBehaviour {
 	public bool setAction(BuildingAction action){
 		if (action == BuildingAction.ENERGY) {
 			popMax = ConstantBoard.popAction [action];
+			SoundHandler.instance.playSound ("crystal");
 		} else if (action == BuildingAction.FACTORY) {
 			if (isSuperior (GameBoard.instance.Parameters, neg (ConstantBoard.effectConstruction [action]))) {
 				GameBoard.instance.modifyParameters (ConstantBoard.effectConstruction [action]);
 				popMax = ConstantBoard.popConstruction [action];
 				buildingRenderer.sprite = ConstantBoard.sprites [ConstantBoard.idBuilding [action]];
+				SoundHandler.instance.playSound ("batiment");
 			} else {
 				return false;
 			}
 		} else if (action == BuildingAction.NONE) {
 			popMax = ConstantBoard.popAction [action];
+			if (isFlat) {
+				SoundHandler.instance.playSound ("field");
+			} else {
+				SoundHandler.instance.playSound ("minning");
+			}
 		}
 		if (population > popMax) {
 			addPopulation (popMax - population);

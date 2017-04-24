@@ -23,6 +23,7 @@ public class ConstantBoard : MonoBehaviour {
 		BuildingActionList = new BuildingAction[] { /*BuildingAction.IDLE,*/ BuildingAction.NONE, BuildingAction.FACTORY};
 		//World Size
 		Vector2 worldSize = new Vector2(12,6);
+		musicChange = new int[2]{ 3, 8 };
 		//popAction
 		popAction.Add (BuildingAction.IDLE, 10);
 		popAction.Add (BuildingAction.NONE, 1);
@@ -79,6 +80,7 @@ public class ConstantBoard : MonoBehaviour {
 
 	}
 
+	public int[] musicChange;
 	public Vector2 worldSize;
 	public Sprite[] buildingSprites;
 	public Sprite[] backgroundSprites;
