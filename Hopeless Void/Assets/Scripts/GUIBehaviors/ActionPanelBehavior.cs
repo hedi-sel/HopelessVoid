@@ -23,9 +23,7 @@ public class ActionPanelBehavior : MonoBehaviour {
 	public Image imageBackground;
 	public RectTransform transformBar;
 	public ActionPanelRessourceBehavior ressourcesBehavior;
-
-
-	public ActionPanel actionPanel;
+public ActionPanel actionPanel;
 
 	void Awake(){
 		if (actionPanel.name!="") {
@@ -76,5 +74,22 @@ public class ActionPanelBehavior : MonoBehaviour {
 			infos.Add (r);
 		}
 		ressourcesBehavior.Show(infos,_actionPanel.populationNeeded);
+	}
+
+	private ActionPanelBehavior bar;
+	private Image image;
+
+	new public Sprite light;
+	public Sprite dark;
+
+
+	void OnMouseEnter(){
+		image = GetComponent<Image> ();
+		image.sprite = dark;	
+	}
+
+	void OnMouseExit(){
+		image = GetComponent<Image> ();
+		image.sprite = light;
 	}
 }

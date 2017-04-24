@@ -16,7 +16,6 @@ public class Destroy : MonoBehaviour {
 
 	public void Update(){
 		box.size = new Vector2(rect.rect.width,rect.rect.height);
-		box.offset = new Vector2 (-box.size.x / 2, 0f);
 	}
 
 	private bool pushed = false;

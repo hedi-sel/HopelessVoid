@@ -17,7 +17,7 @@ public class GameHandler : MonoBehaviour {
 	void Awake(){
 		DontDestroyOnLoad (transform.gameObject);
 		if (m_Instance != null) {
-			Destroy (this);
+			Destroy (this.gameObject);
 		} else {
 			m_Instance = this;
 		}
