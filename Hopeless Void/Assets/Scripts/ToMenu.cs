@@ -33,6 +33,7 @@ public class ToMenu : MonoBehaviour {
 	}
 
 	void Pushed(){
+		GUIHandler.instance.Intro ();
 		GameHandler.instance.SetState ("MenuScene");
 	}
 }

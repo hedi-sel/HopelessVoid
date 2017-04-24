@@ -140,7 +140,6 @@ public class GameBoard : MonoBehaviour {
 	//HexagonProperties
 
 	void Start () {
-		SoundHandler.instance.playMusic ("debut" + Random.Range (0, 2));
 		dirToVectInit ();
 		ConstantBoard.instance.HexagonPropertiesInit ();
 		generateMap ( ConstantBoard.instance.worldSize );

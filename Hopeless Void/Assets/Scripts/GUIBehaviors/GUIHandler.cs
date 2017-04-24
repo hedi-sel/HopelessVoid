@@ -11,6 +11,7 @@ public class GUIHandler : MonoBehaviour {
 	public GameObject gameOver;
 	public GameObject victory;
 	public GameObject nextTurn;
+	public GameObject intro;
 
 	void Awake(){
 		nextTurn.SetActive (true);
@@ -44,6 +45,11 @@ public class GUIHandler : MonoBehaviour {
 		outline.GetComponent<SpriteRenderer> ().sprite = outlineSprite;
 		highlight = Instantiate (hexagon, here);
 		highlight.GetComponent<SpriteRenderer> ().sprite = highlightSprite;
+
+		gameOver.SetActive(false);
+		victory.SetActive(false);
+		nextTurn.SetActive(true);
+
 	}
 
 
@@ -94,12 +100,22 @@ public class GUIHandler : MonoBehaviour {
 	public void GameOver(){
 		gameOver.SetActive(true);
 		nextTurn.SetActive(false);
+		GameBoard.instance.gameObject.SetActive (false);
+
 		SoundHandler.instance.playMusic ("gameOver");
 	}
 	public void Victory(){
 		victory.SetActive(true);
 		nextTurn.SetActive(false);
+		intro.SetActive(true);
+		GameBoard.instance.gameObject.SetActive (false);
+
 		SoundHandler.instance.playMusic ("victory");
+
+	}
+	public void Intro(){
+		intro.SetActive(false);
+		GameBoard.instance.gameObject.SetActive (true);
 
 	}
 }
