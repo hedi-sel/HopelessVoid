@@ -34,6 +34,12 @@ public class BottomBarBehavior : MonoBehaviour {
 		actionHolder.SetActions( _hexagon.getActionPlanelList ());
 	}
 
+	public void Change(){
+		peopleMax = hexagon.getMaxPopulation ();
+		Refresh ();
+		actionHolder.SetActions(hexagon.getActionPlanelList ());
+	}
+
 	public void Update(){
 		box.size = new Vector2(rect.rect.width,rect.rect.height);
 	}
