@@ -66,12 +66,14 @@ public class GameBoard : MonoBehaviour {
 	public Sprite voidSprite;
 
 	public void commit() {
+		SoundHandler.instance.playSound ("danger");
 		turnCounter++;
 		if (turnCounter == ConstantBoard.instance.musicChange [0]) {//Play musique milieu
 			SoundHandler.instance.playMusic ("milieu" + Random.Range (0, 3));
 		} else if (turnCounter == ConstantBoard.instance.musicChange [1]) {
 			SoundHandler.instance.playMusic ("fin" + Random.Range (0, 2));
 		}
+
 		HexagonBehavior[] hexagons = new HexagonBehavior[map.Count];
 		map.Values.CopyTo (hexagons, 0);
 

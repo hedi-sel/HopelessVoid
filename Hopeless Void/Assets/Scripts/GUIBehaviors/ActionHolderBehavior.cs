@@ -51,7 +51,7 @@ public class ActionHolderBehavior : MonoBehaviour {
 	}
 
 	public void Open() {
-		//SoundHandler.instance.playSound ("click0");
+		SoundHandler.instance.playSound ("click0");
 		opened = true;
 		options.Clear ();
 		for(int k = 1; k < actions.Length; k++){
@@ -66,7 +66,7 @@ public class ActionHolderBehavior : MonoBehaviour {
 	}
 
 	public void Close() {
-		//SoundHandler.instance.playSound ("closing");
+		SoundHandler.instance.playSound ("closing");
 		opened = false;
 		foreach (ActionOptionPanelBehavior a in options) {
 			Destroy (a.gameObject);
@@ -80,7 +80,7 @@ public class ActionHolderBehavior : MonoBehaviour {
 	}
 
 	public void GotClicked(int id){
-		//SoundHandler.instance.playSound ("click2");
+		SoundHandler.instance.playSound ("click1");
 		if (bottom.hexagon.setAction (actions [id].id.action)) {
 			actionPanelBehavior.SetActionPanel (GetActionPanel());
 			SetActions (bottom.hexagon.getActionPlanelList ());

@@ -94,9 +94,12 @@ public class GUIHandler : MonoBehaviour {
 	public void GameOver(){
 		gameOver.SetActive(true);
 		nextTurn.SetActive(false);
+		SoundHandler.instance.playMusic ("gameOver");
 	}
 	public void Victory(){
 		victory.SetActive(true);
 		nextTurn.SetActive(false);
+		SoundHandler.instance.playMusic ("victory");
+
 	}
 }

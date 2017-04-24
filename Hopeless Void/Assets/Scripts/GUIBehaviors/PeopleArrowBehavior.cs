@@ -39,6 +39,7 @@ public class PeopleArrowBehavior : MonoBehaviour {
 
 	void OnMouseOver() {
 		if (Input.GetMouseButtonDown (0)) {
+			SoundHandler.instance.playSound ("swip");
 			if (!pushed) {
 				Pushed ();
 				SetAnimation (false);

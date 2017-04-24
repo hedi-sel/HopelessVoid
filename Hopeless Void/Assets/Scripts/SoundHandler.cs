@@ -16,35 +16,45 @@ public class SoundHandler : MonoBehaviour {
 
 	private const int NUMBER_SOUNDS = 3;
 	private int currentSound = 0;
-	private AudioSource[] soundPlayers = new AudioSource[NUMBER_SOUNDS] ;
+	public AudioSource[] soundPlayers = new AudioSource[NUMBER_SOUNDS] ;
 
 	void Awake () {
-		foreach(AudioClip audioClip in musiques){
-			musics.Add (audioClip.name, audioClip);
-		}
-		foreach(AudioClip audioClip in sons){
-			sounds.Add (audioClip.name, audioClip);
-		}
 		if (m_Instance != null) {
 			Destroy (this);
 		} else {
 			m_Instance = this;
 		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+	void Start(){
+		foreach(AudioClip audioClip in musiques){
+			musics.Add (audioClip.name, audioClip);
+		}
+		foreach(AudioClip audioClip in sons){
+			sounds.Add (audioClip.name, audioClip);
+		}
+
+		/*for (int i = 0; i < NUMBER_SOUNDS; i++) {
+			soundPlayers [i] = new AudioSource ();
+		}*/
 	}
 
+
 	public void playMusic (string name){
+		try{
 		musicPlayer.clip = musics[name];
 		musicPlayer.Play ();
+		} catch (KeyNotFoundException e) {
+			print (name + " notfound");
+		}
 	}
 
 	public void playSound (string name){
-		soundPlayers [currentSound].clip = sounds[name];
-		soundPlayers [currentSound].Play ();
+		try {
+			soundPlayers [currentSound].clip = sounds[name];
+			soundPlayers [currentSound].Play ();
+		} catch (KeyNotFoundException e) {
+			print (name + " notfound");
+		}
 		//soundPlayers [currentSound].PlayOneShot (sounds[name]);
 		currentSound = (currentSound + 1) % NUMBER_SOUNDS;
 	}
