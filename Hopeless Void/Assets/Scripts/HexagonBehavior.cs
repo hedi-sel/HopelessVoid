@@ -143,16 +143,12 @@ public class HexagonBehavior : MonoBehaviour {
 		ActionPanel panel = new ActionPanel ();
 		if (action.action == BuildingAction.NONE && !isFlat) { // if harvesting or constructing a Mountain
 			panel.name = ConstantBoard.nameBuilding [BuildingAction.IDLE];
-			panel.action = (action.isAction) ? ConstantBoard.nameAction [action.action] :
-			("Build " + ConstantBoard.nameBuilding [action.action]);
+			panel.action = ConstantBoard.nameAction [BuildingAction.IDLE] ;
 			panel.background = ConstantBoard.backgrounds [ConstantBoard.idBackground [action.action]];
 			panel.background = ConstantBoard.backgrounds [ConstantBoard.idBackground [action.action]];
-		}else if (action.action == BuildingAction.IDLE) {
-			panel.name = ConstantBoard.nameBuilding [building];
-			panel.action = "Nothing";
-			panel.background = ConstantBoard.backgrounds [ConstantBoard.idBackground [building]];
+			panel.actionEffect = ConstantBoard.effectAction [BuildingAction.IDLE];
 		} else if (action.action == BuildingAction.ENERGY) {
-			panel.name = "Void";
+			panel.name = ConstantBoard.nameAction [action.action] ;
 			panel.action = ConstantBoard.nameAction [action.action];
 			panel.background = ConstantBoard.backgrounds [ConstantBoard.idBackground [building]];
 		} else {
@@ -174,7 +170,6 @@ public class HexagonBehavior : MonoBehaviour {
 
 	public ActionPanel[] getActionPlanelList (){
 		ActionPanel[] panelList;
-		print (action.ToString ());
 		if (action == BuildingAction.FACTORY) {
 			panelList = new ActionPanel[1];
 			panelList [0] = toActionPanel (new Action (action, action == building));

@@ -54,7 +54,7 @@ public class ConstantBoard : MonoBehaviour {
 			ressources.Add (sprite.name, sprite);
 		}
 		//Nom des actions
-		//nameAction.Add(BuildingAction.IDLE,"Nothing");
+		nameAction.Add(BuildingAction.IDLE,"Harvest montain");
 		nameAction.Add(BuildingAction.NONE,"Harvest field");
 		nameAction.Add(BuildingAction.FACTORY,"Working");
 		nameAction.Add(BuildingAction.ENERGY,"Harvest crystal");
@@ -63,6 +63,7 @@ public class ConstantBoard : MonoBehaviour {
 		nameBuilding.Add(BuildingAction.NONE,"Field");
 		nameBuilding.Add(BuildingAction.FACTORY,"Factory");
 		nameBuilding.Add(BuildingAction.CAPITALE,"Capital");
+		nameBuilding.Add(BuildingAction.ENERGY,"Void");
 		//ID des sprites de batiments
 		idBuilding.Add(BuildingAction.NONE,"Hexagon_Plain_1");
 		idBuilding.Add(BuildingAction.FACTORY,"Built");
