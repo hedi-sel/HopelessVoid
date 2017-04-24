@@ -37,7 +37,7 @@ public class ActionPanelBehavior : MonoBehaviour {
 		actionPanel = _actionPanel;
 		textName.text = _actionPanel.name;
 		textAction.text = _actionPanel.action;
-		textFraction.text = _actionPanel.numerator + "/" + _actionPanel.denumerator;
+		textFraction.text = _actionPanel.denumerator.ToString();
 		imageBackground.sprite = _actionPanel.background;
 		transformBar.anchorMax = new Vector2(((float) _actionPanel.numerator)/ _actionPanel.denumerator,1);
 		transformBar.offsetMax = Vector2.zero;
