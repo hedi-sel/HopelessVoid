@@ -79,6 +79,14 @@ public class GUIHandler : MonoBehaviour {
 		}
 	}
 
+	public void DiedOn(HexagonBehavior _hexagon){
+		_hexagon.populationOnHexagon.KillOne ();
+	}
+
+	public void ChangeOn(HexagonBehavior _hexagon){
+		_hexagon.populationOnHexagon.SetPeople (_hexagon.population);
+	}
+
 	public void Open(HexagonBehavior _hexagon){
 		bottom.gameObject.SetActive (true);
 		outlined = _hexagon;

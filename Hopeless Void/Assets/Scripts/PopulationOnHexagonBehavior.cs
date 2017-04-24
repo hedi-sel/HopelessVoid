@@ -5,6 +5,7 @@ using UnityEngine;
 public class PopulationOnHexagonBehavior : MonoBehaviour {
 
 	public GameObject humain;
+	public GameObject skull;
 
 	private const float RAYON = 1f;
 	private int people;
@@ -24,5 +25,13 @@ public class PopulationOnHexagonBehavior : MonoBehaviour {
 			peoples.RemoveAt (0);
 			Destroy (g);
 		}
+	}
+
+	public void KillOne(){
+		people--;
+		GameObject g = peoples [0];
+		Instantiate (skull, g.transform.position, Quaternion.identity, transform);
+		peoples.RemoveAt (0);
+		Destroy (g);
 	}
 }

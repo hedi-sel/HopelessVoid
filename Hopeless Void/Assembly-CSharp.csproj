@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\ConstantBoard.cs" />
      <Compile Include="Assets\Scripts\Destroy.cs" />
+     <Compile Include="Assets\Scripts\DieBehavior.cs" />
      <Compile Include="Assets\Scripts\GUIBehaviors\ActionHolderBehavior.cs" />
      <Compile Include="Assets\Scripts\GUIBehaviors\ActionOptionPanelBehavior.cs" />
      <Compile Include="Assets\Scripts\GUIBehaviors\ActionPanelBehavior.cs" />
