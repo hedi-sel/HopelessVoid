@@ -33,8 +33,7 @@ public class GameBoard : MonoBehaviour {
 		m_Instance = null;
 	}
 
-	public int MapHeight;
-	public int MapWidth;
+	public float xMax, xMin, yMax, yMin;
 	public GameObject prefabHexagon;
 
 	private Dictionary<Vector2,HexagonBehavior> map = new Dictionary<Vector2,HexagonBehavior>();
@@ -150,6 +149,19 @@ public class GameBoard : MonoBehaviour {
 			c = hexagons[Random.Range(0,map.Count)].coordinates + directionsVector2[Random.Range(0,6)] ;
 		
 		}
+		// Positions extremes
+		foreach (HexagonBehavior hex in map.Values) {
+			if (hex.transform.position.x > xMax) {
+				xMax = hex.transform.position.x;
+			} else if (hex.transform.position.x < xMin) {
+				xMin = hex.transform.position.x;
+			} else if (hex.transform.position.y > yMax) {
+				yMax = hex.transform.position.y;
+			} else if (hex.transform.position.y < yMin) {
+				yMin = hex.transform.position.y;
+			}
+		}
+
 	}
 		
 
