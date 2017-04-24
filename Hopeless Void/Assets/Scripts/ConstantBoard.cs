@@ -36,7 +36,7 @@ public class ConstantBoard : MonoBehaviour {
 		effectAction.Add (BuildingAction.IDLE, new int[] {0, 3, 0, 0, 0});
 		effectAction.Add (BuildingAction.NONE, new int[] {3, 0, 0, 0, 0});
 		effectAction.Add (BuildingAction.ENERGY, new int[] {0, 0, 5, 0, 0});
-		effectAction.Add (BuildingAction.FACTORY, new int[] {0, -5, 0, 10, 0});
+		effectAction.Add (BuildingAction.FACTORY, new int[] {0, -5, 0, 0, 10});
 		effectAction.Add (BuildingAction.CAPITALE, new int[] {0, 0, 0, 0, 0});
 		//effectConstruction
 		effectConstruction.Add (BuildingAction.IDLE, new int[] {0, 0, 0, 0, 0});
@@ -54,17 +54,19 @@ public class ConstantBoard : MonoBehaviour {
 			ressources.Add (sprite.name, sprite);
 		}
 		//Nom des actions
-		nameAction.Add(BuildingAction.IDLE,"Nothing");
-		nameAction.Add(BuildingAction.NONE,"Harvest");
+		//nameAction.Add(BuildingAction.IDLE,"Nothing");
+		nameAction.Add(BuildingAction.NONE,"Harvest field");
 		nameAction.Add(BuildingAction.FACTORY,"Working");
+		nameAction.Add(BuildingAction.ENERGY,"Harvest crystal");
 		//Nom des batiments
 		nameBuilding.Add(BuildingAction.IDLE,"Mountain");
-		nameBuilding.Add(BuildingAction.NONE,"Plain");
+		nameBuilding.Add(BuildingAction.NONE,"Field");
 		nameBuilding.Add(BuildingAction.FACTORY,"Factory");
 		nameBuilding.Add(BuildingAction.CAPITALE,"Capital");
 		//ID des sprites de batiments
 		idBuilding.Add(BuildingAction.NONE,"Hexagon_Plain_1");
-		idBuilding.Add(BuildingAction.FACTORY,"Factory");
+		idBuilding.Add(BuildingAction.FACTORY,"Built");
+		idBuilding.Add(BuildingAction.CAPITALE,"Factory");
 
 		idBackground.Add(BuildingAction.NONE,"Food");
 		idBackground.Add(BuildingAction.FACTORY,"Metal");

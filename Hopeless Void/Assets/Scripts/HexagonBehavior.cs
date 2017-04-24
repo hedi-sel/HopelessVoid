@@ -26,6 +26,8 @@ public class HexagonBehavior : MonoBehaviour {
 	public int population;
 	public int popMax;
 	public int locked;
+	public bool enConstruction;
+
 
 	[HideInInspector]
 	public PopulationOnHexagonBehavior populationOnHexagon;
@@ -43,30 +45,27 @@ public class HexagonBehavior : MonoBehaviour {
 	public void computeRessources(){
 		if (action == BuildingAction.NONE && !isFlat) GameBoard.instance.modifyParameters (ConstantBoard.effectAction [BuildingAction.IDLE]); // IF harvesting a mountain
 		else
-			GameBoard.instance.modifyParameters ( ConstantBoard.effectAction [action]);
+			GameBoard.instance.modifyParameters ( ConstantBoard.effectAction [action]);//Harvest a field
 		print (action.ToString ());
 	}
 
 	public bool commit() {
 		GUIHandler.instance.Close ();
-		if (action == BuildingAction.IDLE)
-			return true;
-		else if (action == BuildingAction.ENERGY) {
+		if (action == BuildingAction.ENERGY) {
 			computeRessources ();
-		}
-		else {
-			if (population == popMax) {
-				if (action == building) {
-					computeRessources ();
-				} else {				
-					building = action;
-					popMax = ConstantBoard.popAction [building];
-					buildingRenderer.sprite = ConstantBoard.sprites 
-						[ConstantBoard.idBuilding[action]];
-				}
-
+		} else if (population == popMax) {
+			if (action == BuildingAction.NONE) {
+				computeRessources ();
+			} else if(action == BuildingAction.FACTORY) {				
+				building = action;
+				popMax = ConstantBoard.popAction [building];
+				buildingRenderer.sprite = ConstantBoard.sprites [ConstantBoard.idBuilding [BuildingAction.CAPITALE]];
+			} else {
+				print ("Problem in COmmit");
 			}
+
 		}
+
 		GameBoard.instance.updateInterfaceParameters ();
 
 		return true;
@@ -111,21 +110,14 @@ public class HexagonBehavior : MonoBehaviour {
 		GUIHandler.instance.Close ();
 		if (action == BuildingAction.ENERGY) {
 			popMax = ConstantBoard.popAction [action];
-		}else
-		if (action != BuildingAction.IDLE) {
-			if (action != building) {
-				if (isSuperior (GameBoard.instance.Parameters, neg (ConstantBoard.effectConstruction [action]))) {
-					GameBoard.instance.modifyParameters (ConstantBoard.effectConstruction [action]);
-					popMax = ConstantBoard.popConstruction [action];
-					GUIHandler.instance.Refresh ();
-					buildingRenderer.sprite = ConstantBoard.sprites 
-						[ConstantBoard.idBuilding[action]];
-				}else {
-					return false;
-				}
+		} else if (action == BuildingAction.FACTORY) {
+			if (isSuperior (GameBoard.instance.Parameters, neg (ConstantBoard.effectConstruction [action]))) {
+				GameBoard.instance.modifyParameters (ConstantBoard.effectConstruction [action]);
+				popMax = ConstantBoard.popConstruction [action];
+				buildingRenderer.sprite = ConstantBoard.sprites [ConstantBoard.idBuilding [action]];
 			}
-			if (action == building && isSuperior (GameBoard.instance.Parameters, ConstantBoard.effectConstruction [action]))
-				return false;
+		} else if (action == BuildingAction.NONE) {
+			return true;
 		}
 		this.action = action;
 		GameBoard.instance.updateInterfaceParameters ();
@@ -161,7 +153,7 @@ public class HexagonBehavior : MonoBehaviour {
 			panel.background = ConstantBoard.backgrounds [ConstantBoard.idBackground [building]];
 		} else if (action.action == BuildingAction.ENERGY) {
 			panel.name = "Void";
-			panel.action = "Harvest Energy";
+			panel.action = ConstantBoard.nameAction [action.action];
 			panel.background = ConstantBoard.backgrounds [ConstantBoard.idBackground [building]];
 		} else {
 			panel.name = ConstantBoard.nameBuilding [action.action];
@@ -181,27 +173,37 @@ public class HexagonBehavior : MonoBehaviour {
 	}
 
 	public ActionPanel[] getActionPlanelList (){
-		ActionPanel[] panelList = new ActionPanel[ConstantBoard.BuildingActionList.Length 
-			+ ( (GameBoard.instance.destructible(this) )?1 : 0)];
-		panelList [0] = toActionPanel( 
-			new Action(action,action == building || action == BuildingAction.ENERGY) 
-		);
-		int i = 1;
-		foreach (BuildingAction possibleAction in ConstantBoard.BuildingActionList) {
-			if (possibleAction != action){
-				panelList [i] = toActionPanel (
-					new Action(possibleAction,possibleAction == building || possibleAction == BuildingAction.ENERGY)
-				);
-				i++;
+		ActionPanel[] panelList;
+		print (action.ToString ());
+		if (action == BuildingAction.FACTORY) {
+			panelList = new ActionPanel[1];
+			panelList [0] = toActionPanel (new Action (action, action == building));
+			return panelList;
+		} else if (action == BuildingAction.NONE || action == BuildingAction.ENERGY) {
+			panelList = new ActionPanel[ConstantBoard.BuildingActionList.Length
+			+ ((GameBoard.instance.destructible (this)) ? 1 : 0)];
+			panelList [0] = toActionPanel (
+				new Action (action, action == building || action == BuildingAction.ENERGY) 
+			);
+			int i = 1;
+			foreach (BuildingAction possibleAction in ConstantBoard.BuildingActionList) {
+				if (possibleAction != action) {
+					panelList [i] = toActionPanel (
+						new Action (possibleAction, possibleAction == building || possibleAction == BuildingAction.ENERGY)
+					);
+					i++;
+				}
 			}
-		}
-		if (GameBoard.instance.destructible(this) && action != BuildingAction.ENERGY) 
-			panelList [ConstantBoard.BuildingActionList.Length] = 
-				toActionPanel ( new Action(BuildingAction.ENERGY,true) );
-		return panelList;
+			if (GameBoard.instance.destructible (this) && action != BuildingAction.ENERGY)
+				panelList [ConstantBoard.BuildingActionList.Length] = 
+				toActionPanel (new Action (BuildingAction.ENERGY, true));
+			return panelList;
 			
+		} else { 
+			print ("problem in getActionL+PanelList");
+			return null;
+		}
 	}
-
 	void OnMouseEnter() {
 		GUIHandler.instance.Highlight (this);
 
