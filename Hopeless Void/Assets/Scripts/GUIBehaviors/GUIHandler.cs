@@ -72,6 +72,10 @@ public class GUIHandler : MonoBehaviour {
 		outline.SetActive (true);
 	}
 
+	public void Refresh(){
+		bottom.Change ();
+	}
+
 	public void Close(){
 		bottom.Off ();
 		outline.SetActive (false);
