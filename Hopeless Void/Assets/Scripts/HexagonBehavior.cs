@@ -107,7 +107,6 @@ public class HexagonBehavior : MonoBehaviour {
 	}
 
 	public bool setAction(BuildingAction action){
-		GUIHandler.instance.Close ();
 		if (action == BuildingAction.ENERGY) {
 			popMax = ConstantBoard.popAction [action];
 		} else if (action == BuildingAction.FACTORY) {
@@ -121,6 +120,7 @@ public class HexagonBehavior : MonoBehaviour {
 		}
 		this.action = action;
 		GameBoard.instance.updateInterfaceParameters ();
+		GUIHandler.instance.Refresh ();
 		return true;
 	}
 		
