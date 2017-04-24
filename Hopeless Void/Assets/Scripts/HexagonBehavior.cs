@@ -110,7 +110,6 @@ public class HexagonBehavior : MonoBehaviour {
 		if (action == BuildingAction.ENERGY) {
 			popMax = ConstantBoard.popAction [action];
 		} else if (action == BuildingAction.FACTORY) {
-			print (isSuperior (GameBoard.instance.Parameters, neg (ConstantBoard.effectConstruction [action])));
 			if (isSuperior (GameBoard.instance.Parameters, neg (ConstantBoard.effectConstruction [action]))) {
 				GameBoard.instance.modifyParameters (ConstantBoard.effectConstruction [action]);
 				popMax = ConstantBoard.popConstruction [action];
