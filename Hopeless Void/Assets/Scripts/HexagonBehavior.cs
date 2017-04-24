@@ -46,7 +46,6 @@ public class HexagonBehavior : MonoBehaviour {
 		if (action == BuildingAction.NONE && !isFlat) GameBoard.instance.modifyParameters (ConstantBoard.effectAction [BuildingAction.IDLE]); // IF harvesting a mountain
 		else
 			GameBoard.instance.modifyParameters ( ConstantBoard.effectAction [action]);//Harvest a field
-		print (action.ToString ());
 	}
 
 	public bool commit() {
@@ -167,8 +166,11 @@ public class HexagonBehavior : MonoBehaviour {
 		panel.id = action;
 		panel.denumerator = (action.isAction) ? ConstantBoard.popAction [action.action] : ConstantBoard.popConstruction [action.action];
 		panel.numerator = 0;
-		panel.actionEffect = (action.isAction) ? ConstantBoard.effectAction [action.action] :
-			ConstantBoard.effectConstruction [action.action];
+		if (!isFlat && action.action==BuildingAction.NONE)
+			panel.actionEffect = ConstantBoard.effectAction [BuildingAction.IDLE] ;
+		else
+			panel.actionEffect = (action.isAction) ? ConstantBoard.effectAction [action.action] :
+		ConstantBoard.effectConstruction [action.action];
 		panel.populationNeeded = (action.isAction) ? ConstantBoard.popAction [action.action] :
 			ConstantBoard.popConstruction [action.action];
 

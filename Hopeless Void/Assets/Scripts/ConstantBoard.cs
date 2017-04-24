@@ -35,7 +35,7 @@ public class ConstantBoard : MonoBehaviour {
 		popConstruction.Add (BuildingAction.FACTORY, 5);
 		popConstruction.Add (BuildingAction.CAPITALE, 0);
 		//effectAction
-		effectAction.Add (BuildingAction.IDLE, new int[] {0, 3, 0, 0, 0});
+		effectAction.Add (BuildingAction.IDLE, new int[] {0, 2, 0, 0, 0});
 		effectAction.Add (BuildingAction.NONE, new int[] {2, 0, 0, 0, 0});
 		effectAction.Add (BuildingAction.ENERGY, new int[] {0, 0, 1, 0, 0});
 		effectAction.Add (BuildingAction.FACTORY, new int[] {0, -3, -1, 0, 1});

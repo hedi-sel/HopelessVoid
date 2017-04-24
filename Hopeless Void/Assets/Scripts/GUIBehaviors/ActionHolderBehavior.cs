@@ -38,6 +38,7 @@ public class ActionHolderBehavior : MonoBehaviour {
 		}
 	}
 
+
 	public List<ActionOptionPanelBehavior> options = new List<ActionOptionPanelBehavior>();
 	public GameObject panelTemplate;
 
