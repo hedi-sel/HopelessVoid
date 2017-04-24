@@ -37,7 +37,7 @@ public class ActionPanelBehavior : MonoBehaviour {
 		actionPanel = _actionPanel;
 		textName.text = _actionPanel.name;
 		textAction.text = _actionPanel.action;
-		textFraction.text = _actionPanel.denumerator.ToString();
+		textFraction.text = "";
 		imageBackground.sprite = _actionPanel.background;
 		transformBar.anchorMax = new Vector2(((float) _actionPanel.numerator)/ _actionPanel.denumerator,1);
 		transformBar.offsetMax = Vector2.zero;
@@ -75,6 +75,6 @@ public class ActionPanelBehavior : MonoBehaviour {
 			r.sprite = ConstantBoard.ressources ["Capsule"];
 			infos.Add (r);
 		}
-		ressourcesBehavior.Show(infos);
+		ressourcesBehavior.Show(infos,_actionPanel.populationNeeded);
 	}
 }
