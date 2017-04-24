@@ -123,7 +123,7 @@ public class GameBoard : MonoBehaviour {
 	void Start () {
 		dirToVectInit ();
 		ConstantBoard.instance.HexagonPropertiesInit ();
-		generateMap ( new Vector2(15,5) );
+		generateMap ( ConstantBoard.instance.worldSize );
 		checkDestructibleCells ();
 
 	}

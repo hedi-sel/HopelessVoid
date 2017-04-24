@@ -21,27 +21,29 @@ public class ConstantBoard : MonoBehaviour {
 		ressources = new Dictionary<string,Sprite> ();
 
 		BuildingActionList = new BuildingAction[] { /*BuildingAction.IDLE,*/ BuildingAction.NONE, BuildingAction.FACTORY};
+		//World Size
+		Vector2 worldSize = new Vector2(12,4);
 		//popAction
 		popAction.Add (BuildingAction.IDLE, 10);
 		popAction.Add (BuildingAction.NONE, 1);
 		popAction.Add (BuildingAction.ENERGY, 2);
-		popAction.Add (BuildingAction.FACTORY, 5);
+		popAction.Add (BuildingAction.FACTORY, 3);
 		popAction.Add (BuildingAction.CAPITALE, 0);
 		//popConstruction
-		popConstruction.Add (BuildingAction.IDLE, 0);
-		popConstruction.Add (BuildingAction.NONE, 2);
+		popConstruction.Add (BuildingAction.IDLE, 1);
+		popConstruction.Add (BuildingAction.NONE, 1);
 		popConstruction.Add (BuildingAction.FACTORY, 5);
 		popConstruction.Add (BuildingAction.CAPITALE, 0);
 		//effectAction
-		effectAction.Add (BuildingAction.IDLE, new int[] {0, 3, 0, 0, 0});
-		effectAction.Add (BuildingAction.NONE, new int[] {3, 0, 0, 0, 0});
-		effectAction.Add (BuildingAction.ENERGY, new int[] {0, 0, 5, 0, 0});
-		effectAction.Add (BuildingAction.FACTORY, new int[] {0, -5, 0, 0, 10});
+		effectAction.Add (BuildingAction.IDLE, new int[] {0, 2, 0, 0, 0});
+		effectAction.Add (BuildingAction.NONE, new int[] {2, 0, 0, 0, 0});
+		effectAction.Add (BuildingAction.ENERGY, new int[] {0, 0, 1, 0, 0});
+		effectAction.Add (BuildingAction.FACTORY, new int[] {0, -3, -1, 0, 10});
 		effectAction.Add (BuildingAction.CAPITALE, new int[] {0, 0, 0, 0, 0});
 		//effectConstruction
 		effectConstruction.Add (BuildingAction.IDLE, new int[] {0, 0, 0, 0, 0});
 		effectConstruction.Add (BuildingAction.NONE, new int[] {0, 10, 0, 0, 0});
-		effectConstruction.Add (BuildingAction.FACTORY, new int[] {0, -20, -10, 0, 0});
+		effectConstruction.Add (BuildingAction.FACTORY, new int[] {0, -10, -2, 0, 0});
 		effectConstruction.Add (BuildingAction.CAPITALE, new int[] {0, 0, 0, 0, 0});
 		//sprites
 		foreach (Sprite sprite in buildingSprites) {
@@ -77,7 +79,7 @@ public class ConstantBoard : MonoBehaviour {
 
 	}
 
-
+	public Vector2 worldSize;
 	public Sprite[] buildingSprites;
 	public Sprite[] backgroundSprites;
 	public Sprite[] ressourceSprites;
