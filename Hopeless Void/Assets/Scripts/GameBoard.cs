@@ -101,7 +101,7 @@ public class GameBoard : MonoBehaviour {
 				if (hexagon.population > 0) {
 					hexagon.population -= 1;
 					occupiedPopulation -= 1;
-					//WAZA
+					GUIHandler.instance.DiedOn (hexagon);
 				}
 				
 			}

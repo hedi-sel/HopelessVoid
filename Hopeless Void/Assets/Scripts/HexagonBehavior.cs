@@ -51,13 +51,17 @@ public class HexagonBehavior : MonoBehaviour {
 	public bool commit() {
 		GUIHandler.instance.Close ();
 		if (population == popMax) {
-			if (! (building == BuildingAction.NONE) || ! (action == BuildingAction.FACTORY) ) {
+			if (! (action == BuildingAction.FACTORY) ) {
 				computeRessources ();
-			} else {				
+			} else if ((building == BuildingAction.NONE)) {				
 				building = action;
 				popMax = ConstantBoard.popAction [building];
 				buildingRenderer.sprite = ConstantBoard.sprites [ConstantBoard.idBuilding [BuildingAction.CAPITALE]];
 				GUIHandler.instance.ChangeOn (this);
+			} else {//Working in the factory
+				if (  isSuperior ( GameBoard.instance.Parameters, neg (ConstantBoard.effectAction [action]) )  ) {
+					computeRessources ();
+				}
 			}
 
 		}

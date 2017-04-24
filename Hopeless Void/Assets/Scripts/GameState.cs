@@ -12,7 +12,7 @@ public class GameState : State {
 	float xMax; float xMin;	float yMax; float yMin;
 	void Update () {
 
-		float a =GameBoard.instance.GetComponent<Transform>().localScale.x;
+		float a = GameBoard.instance.GetComponent<Transform> ().localScale.x;
 
 		xMax = GameBoard.instance.xMax * a;
 		xMin = GameBoard.instance.xMin * a;
@@ -20,11 +20,11 @@ public class GameState : State {
 		yMin = GameBoard.instance.yMin * a;
 
 		if (Input.GetButtonDown ("Right Click")) {
-			mouseLastPos = new Vector3(0,0,0) ;
+			mouseLastPos = new Vector3 (0, 0, 0);
 			destination = transform.position;
 		}
-		if (Input.GetButton("Right Click")) {
-			destination = destination - getMouseSpeed() ;
+		if (Input.GetButton ("Right Click")) {
+			destination = destination - getMouseSpeed ();
 		}
 		if (destination != transform.position) {
 			destination.z = GameHandler.instance.transform.position.z;
