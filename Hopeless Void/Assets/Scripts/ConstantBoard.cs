@@ -22,7 +22,7 @@ public class ConstantBoard : MonoBehaviour {
 
 		BuildingActionList = new BuildingAction[] { /*BuildingAction.IDLE,*/ BuildingAction.NONE, BuildingAction.FACTORY};
 		//World Size
-		Vector2 worldSize = new Vector2(12,4);
+		Vector2 worldSize = new Vector2(12,6);
 		//popAction
 		popAction.Add (BuildingAction.IDLE, 10);
 		popAction.Add (BuildingAction.NONE, 1);
@@ -35,7 +35,7 @@ public class ConstantBoard : MonoBehaviour {
 		popConstruction.Add (BuildingAction.FACTORY, 5);
 		popConstruction.Add (BuildingAction.CAPITALE, 0);
 		//effectAction
-		effectAction.Add (BuildingAction.IDLE, new int[] {0, 2, 0, 0, 0});
+		effectAction.Add (BuildingAction.IDLE, new int[] {0, 3, 0, 0, 0});
 		effectAction.Add (BuildingAction.NONE, new int[] {2, 0, 0, 0, 0});
 		effectAction.Add (BuildingAction.ENERGY, new int[] {0, 0, 1, 0, 0});
 		effectAction.Add (BuildingAction.FACTORY, new int[] {0, -3, -1, 0, 1});
@@ -56,9 +56,9 @@ public class ConstantBoard : MonoBehaviour {
 			ressources.Add (sprite.name, sprite);
 		}
 		//Nom des actions
-		nameAction.Add(BuildingAction.IDLE,"Harvest montain");
-		nameAction.Add(BuildingAction.NONE,"Harvest field");
-		nameAction.Add(BuildingAction.FACTORY,"Working");
+		nameAction.Add(BuildingAction.IDLE,"Harvest metal");
+		nameAction.Add(BuildingAction.NONE,"Harvest food");
+		nameAction.Add(BuildingAction.FACTORY,"Build the capsule");
 		nameAction.Add(BuildingAction.ENERGY,"Harvest crystal");
 		//Nom des batiments
 		nameBuilding.Add(BuildingAction.IDLE,"Mountain");

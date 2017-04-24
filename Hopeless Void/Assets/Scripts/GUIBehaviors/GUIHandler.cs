@@ -1,13 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GUIHandler : MonoBehaviour {
 
 	static private GUIHandler m_Instance;
 	static public GUIHandler instance { get { return m_Instance; } }
 
+	public GameObject gameOver;
+	public GameObject victory;
+	public GameObject nextTurn;
+
 	void Awake(){
+		nextTurn.SetActive (true);
 		if (m_Instance != null) {
 			Destroy (this);
 		} else {
@@ -40,15 +46,19 @@ public class GUIHandler : MonoBehaviour {
 		highlight.GetComponent<SpriteRenderer> ().sprite = highlightSprite;
 	}
 
+
 	void Update(){
-		if(Input.GetButtonDown ("Left Click")){
+		if (Input.GetButtonDown ("Left Click")) {
 			if (bottom.hovered) {
 
 			} else if (highlighted != null && highlight.activeSelf) {
 				GUIHandler.instance.Open (highlighted);
 			}
 		}
+			
+	
 	}
+		
 
 	public void Highlight(HexagonBehavior _hexagon){
 		highlighted = _hexagon;
@@ -79,5 +89,14 @@ public class GUIHandler : MonoBehaviour {
 	public void Close(){
 		bottom.Off ();
 		outline.SetActive (false);
+	}
+
+	public void GameOver(){
+		gameOver.SetActive(true);
+		nextTurn.SetActive(false);
+	}
+	public void Victory(){
+		victory.SetActive(true);
+		nextTurn.SetActive(false);
 	}
 }

@@ -155,7 +155,7 @@ public class HexagonBehavior : MonoBehaviour {
 			panel.background = ConstantBoard.backgrounds [ConstantBoard.idBackground [action.action]];
 			panel.actionEffect = ConstantBoard.effectAction [BuildingAction.IDLE];
 		} else if (action.action == BuildingAction.ENERGY) {
-			panel.name = ConstantBoard.nameAction [action.action] ;
+			panel.name = ConstantBoard.nameBuilding [action.action] ;
 			panel.action = ConstantBoard.nameAction [action.action];
 			panel.background = ConstantBoard.backgrounds [ConstantBoard.idBackground [building]];
 		} else {

@@ -74,6 +74,7 @@
      <Compile Include="Assets\Scripts\PopulationOnHexagonBehavior.cs" />
      <Compile Include="Assets\Scripts\SoundHandler.cs" />
      <Compile Include="Assets\Scripts\State.cs" />
+     <Compile Include="Assets\ToMenu.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

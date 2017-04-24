@@ -65,11 +65,6 @@ public class GameBoard : MonoBehaviour {
 	public Sprite voidSprite;
 
 	public void commit() {
-		if (map.Count == 1 || Parameters[3]<1 ){
-			GameHandler.instance.SetState ("MenuScene");
-			return;
-		}
-
 		HexagonBehavior[] hexagons = new HexagonBehavior[map.Count];
 		map.Values.CopyTo (hexagons, 0);
 
@@ -108,6 +103,15 @@ public class GameBoard : MonoBehaviour {
 		updateInterfaceParameters ();
 
 		checkDestructibleCells ();
+		if (Parameters[4]>=maxCapsule){
+			Parameters [4] = maxCapsule;
+			GUIHandler.instance.Victory (); //
+			return;
+		}
+		if (Parameters[3]<1 || map.Count == 1){
+			GUIHandler.instance.GameOver (); //
+			return;
+		}
 	}	
 
 
@@ -119,6 +123,10 @@ public class GameBoard : MonoBehaviour {
 				hex.effectRenderer.sprite = null;
 			}
 		}
+	}
+
+	void GameOver(){
+
 	}
 		
 	//HexagonProperties
