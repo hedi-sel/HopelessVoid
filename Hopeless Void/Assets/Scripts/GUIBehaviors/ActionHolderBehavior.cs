@@ -12,7 +12,6 @@ public class ActionHolderBehavior : MonoBehaviour {
 	public bool opened;
 
 	private ActionPanel[] actions;
-	private int curAction;
 	private ActionPanelBehavior actionPanelBehavior;
 
 	void Awake(){
@@ -52,19 +51,15 @@ public class ActionHolderBehavior : MonoBehaviour {
 
 	public void Open() {
 		opened = true;
-		int i = 0;
 		options.Clear ();
-		for(int k = 0; k < actions.Length; k++){
-			if (k != curAction) {
-				i++;
-				ActionOptionPanelBehavior action = Instantiate (panelTemplate, transform).GetComponent<ActionOptionPanelBehavior>();
-				action.SetActionPanel (actions [k]);
-				action.holder = this;
-				action.id = k;
-				float height = GetComponent<RectTransform> ().rect.height;
-				action.transform.localPosition = new Vector3 (0f, i*(20f+height), 0f);
-				options.Add (action);
-			}
+		for(int k = 1; k < actions.Length; k++){
+			ActionOptionPanelBehavior action = Instantiate (panelTemplate, transform).GetComponent<ActionOptionPanelBehavior>();
+			action.SetActionPanel (actions [k]);
+			action.holder = this;
+			action.id = k;
+			float height = GetComponent<RectTransform> ().rect.height;
+			action.transform.localPosition = new Vector3 (0f, k*(20f+height), 0f);
+			options.Add (action);
 		}
 	}
 
@@ -78,19 +73,19 @@ public class ActionHolderBehavior : MonoBehaviour {
 
 	public void SetActions(ActionPanel[] _actions){
 		actions = _actions;
-		curAction = 0;
 		actionPanelBehavior.SetActionPanel (_actions [0]);
 	}
 
 	public void GotClicked(int id){
-		if (bottom.hexagon.setAction(actions[id].id.action)) {
-			curAction = id;
-			Close ();
+		
+		if (bottom.hexagon.setAction (actions [id].id.action)) {
 			actionPanelBehavior.SetActionPanel (GetActionPanel());
+			SetActions (bottom.hexagon.getActionPlanelList ());
+			Close ();
 		}
 	}
 
 	public ActionPanel GetActionPanel(){
-		return actions [curAction];
+		return actions [0];
 	}
 }

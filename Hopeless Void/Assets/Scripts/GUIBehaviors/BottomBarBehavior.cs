@@ -37,7 +37,6 @@ public class BottomBarBehavior : MonoBehaviour {
 	public void Change(){
 		peopleMax = hexagon.getMaxPopulation ();
 		Refresh ();
-		actionHolder.SetActions(hexagon.getActionPlanelList ());
 	}
 
 	public void Update(){

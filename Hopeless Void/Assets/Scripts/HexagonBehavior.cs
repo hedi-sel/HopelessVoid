@@ -61,7 +61,7 @@ public class HexagonBehavior : MonoBehaviour {
 				popMax = ConstantBoard.popAction [building];
 				buildingRenderer.sprite = ConstantBoard.sprites [ConstantBoard.idBuilding [BuildingAction.CAPITALE]];
 			} else {
-				print ("Problem in COmmit");
+				print ("Problem in commit");
 			}
 
 		}
@@ -107,6 +107,7 @@ public class HexagonBehavior : MonoBehaviour {
 	}
 
 	public bool setAction(BuildingAction action){
+		print (action.ToString());
 		if (action == BuildingAction.ENERGY) {
 			popMax = ConstantBoard.popAction [action];
 		} else if (action == BuildingAction.FACTORY) {
@@ -116,7 +117,7 @@ public class HexagonBehavior : MonoBehaviour {
 				buildingRenderer.sprite = ConstantBoard.sprites [ConstantBoard.idBuilding [action]];
 			}
 		} else if (action == BuildingAction.NONE) {
-			return true;
+			popMax = ConstantBoard.popAction [action];
 		}
 		this.action = action;
 		GameBoard.instance.updateInterfaceParameters ();
