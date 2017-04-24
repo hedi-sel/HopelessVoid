@@ -110,6 +110,7 @@ public class HexagonBehavior : MonoBehaviour {
 		if (action == BuildingAction.ENERGY) {
 			popMax = ConstantBoard.popAction [action];
 		} else if (action == BuildingAction.FACTORY) {
+			print (isSuperior (GameBoard.instance.Parameters, neg (ConstantBoard.effectConstruction [action])));
 			if (isSuperior (GameBoard.instance.Parameters, neg (ConstantBoard.effectConstruction [action]))) {
 				GameBoard.instance.modifyParameters (ConstantBoard.effectConstruction [action]);
 				popMax = ConstantBoard.popConstruction [action];
@@ -130,14 +131,15 @@ public class HexagonBehavior : MonoBehaviour {
 	public bool isSuperior(int[] l1, int[] l2){
 		bool superior = true;
 		for (int i = 0; i < l1.Length; i++) {
-			superior = superior && (l1 [i] > l2 [i]);
+			superior = superior && (l1 [i] >= l2 [i]);
 		}
 		return superior;
 	}
 	public int[] neg(int[] l){
 		int[] negL = new int[l.Length];
-		for (int i = 0; i < l.Length; i++)
-			negL[i] = -l[i];
+		for (int i = 0; i < l.Length; i++) {
+			negL [i] = -l [i];
+		}
 		return negL;
 	}
 
