@@ -60,6 +60,9 @@ public class HexagonBehavior : MonoBehaviour {
 				building = action;
 				popMax = ConstantBoard.popAction [building];
 				buildingRenderer.sprite = ConstantBoard.sprites [ConstantBoard.idBuilding [BuildingAction.CAPITALE]];
+				if (population > popMax) {
+					addPopulation (popMax - population);
+				}
 			} else {
 				print ("Problem in commit");
 			}
