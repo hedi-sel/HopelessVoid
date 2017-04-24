@@ -51,32 +51,30 @@ public class HexagonBehavior : MonoBehaviour {
 
 	public bool commit() {
 		GUIHandler.instance.Close ();
-		if (action == BuildingAction.ENERGY) {
-			computeRessources ();
-		} else if (population == popMax) {
-			if (action == BuildingAction.NONE) {
+		if (population == popMax) {
+			if (! (building == BuildingAction.NONE) || ! (action == BuildingAction.FACTORY) ) {
 				computeRessources ();
-			} else if(action == BuildingAction.FACTORY) {				
+			} else {				
 				building = action;
 				popMax = ConstantBoard.popAction [building];
 				buildingRenderer.sprite = ConstantBoard.sprites [ConstantBoard.idBuilding [BuildingAction.CAPITALE]];
-				if (population > popMax) {
-					addPopulation (popMax - population);
-				}
-			} else {
-				print ("Problem in commit");
+
 			}
 
+		}
+		if (population > popMax) {
+			addPopulation (popMax - population);
 		}
 
 		GameBoard.instance.updateInterfaceParameters ();
 
 		return true;
 	}
+	
 
 	public bool addPopulation(int addPop){
-		if (population + addPop <= popMax && population + addPop >= 0 
-			&& GameBoard.instance.occupiedPopulation + addPop <= GameBoard.instance.Parameters[3]) {
+		if ((population + addPop <= popMax) && (population + addPop >= 0 )
+			&& (GameBoard.instance.occupiedPopulation + addPop) <= (GameBoard.instance.Parameters[3])) {
 			population += addPop; 
 			GameBoard.instance.occupiedPopulation += addPop;
 		}
@@ -116,15 +114,15 @@ public class HexagonBehavior : MonoBehaviour {
 			if (isSuperior (GameBoard.instance.Parameters, neg (ConstantBoard.effectConstruction [action]))) {
 				GameBoard.instance.modifyParameters (ConstantBoard.effectConstruction [action]);
 				popMax = ConstantBoard.popConstruction [action];
-				if (population > popMax) {
-					addPopulation (popMax - population);
-				}
 				buildingRenderer.sprite = ConstantBoard.sprites [ConstantBoard.idBuilding [action]];
 			} else {
 				return false;
 			}
 		} else if (action == BuildingAction.NONE) {
 			popMax = ConstantBoard.popAction [action];
+		}
+		if (population > popMax) {
+			addPopulation (popMax - population);
 		}
 		this.action = action;
 		GameBoard.instance.updateInterfaceParameters ();

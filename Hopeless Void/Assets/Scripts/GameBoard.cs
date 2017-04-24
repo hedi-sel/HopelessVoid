@@ -65,7 +65,6 @@ public class GameBoard : MonoBehaviour {
 	public Sprite voidSprite;
 
 	public void commit() {
-		
 		if (map.Count == 1 || Parameters[3]<1 ){
 			GameHandler.instance.SetState ("MenuScene");
 			return;
@@ -82,6 +81,7 @@ public class GameBoard : MonoBehaviour {
 		while (!destructible(hexagon)) {
 			hexagon = hexagons [Random.Range (0, map.Count)];
 		}
+
 		map.Remove (hexagon.coordinates);
 		hexagon.collapse ();
 
@@ -92,21 +92,24 @@ public class GameBoard : MonoBehaviour {
 			Parameters [0] = 0;
 			Parameters [3] = food;
 			//Procédure de tuage de gens qui meurent de faim
-			while (occupiedPopulation > Parameters[3]) {
+			while (occupiedPopulation > Parameters[3]) { 
+				print ("hi");
 				hexagon = hexagons [Random.Range (0, map.Count)];
-				hexagon.addPopulation (-1);
+				if (hexagon.population > 0) {
+					hexagon.population -= 1;
+					occupiedPopulation -= 1;
+				}
+				
 			}
 			
 		} else
 			Parameters [0] = food - Parameters [3];
 
-
 		updateInterfaceParameters ();
 
 		checkDestructibleCells ();
+	}	
 
-
-	}
 
 	void checkDestructibleCells(){
 		foreach (HexagonBehavior hex in map.Values) {
