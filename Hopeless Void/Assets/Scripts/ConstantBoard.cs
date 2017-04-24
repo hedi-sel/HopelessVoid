@@ -5,6 +5,21 @@ using UnityEngine;
 public class ConstantBoard : MonoBehaviour {
 	
 	public void  HexagonPropertiesInit (){
+		popAction = new Dictionary<BuildingAction,int> ();
+		popConstruction = new Dictionary<BuildingAction,int> ();
+
+		effectAction = new Dictionary<BuildingAction,int[]> ();
+		effectConstruction = new Dictionary<BuildingAction,int[]> ();
+
+		nameAction = new Dictionary<BuildingAction,string> ();
+		nameBuilding = new Dictionary<BuildingAction,string> ();
+		idBackground = new Dictionary<BuildingAction,string> ();
+		idBuilding = new Dictionary<BuildingAction,string> ();
+
+		sprites = new Dictionary<string,Sprite> ();
+		backgrounds = new Dictionary<string,Sprite> ();
+		ressources = new Dictionary<string,Sprite> ();
+
 		BuildingActionList = new BuildingAction[] { /*BuildingAction.IDLE,*/ BuildingAction.NONE, BuildingAction.FACTORY};
 		//popAction
 		popAction.Add (BuildingAction.IDLE, 10);
@@ -93,5 +108,9 @@ public class ConstantBoard : MonoBehaviour {
 		} else {
 			m_Instance = this;
 		}
+	}
+
+	public static void DeleteInstance(){
+		m_Instance = null;
 	}
 }

@@ -15,8 +15,9 @@ public class GUIHandler : MonoBehaviour {
 		}
 	}
 
-
-	private bool opened;
+	public static void DeleteInstance(){
+		m_Instance = null;
+	}
 
 	public TopBarBehavior top;
 	public BottomBarBehavior bottom;
@@ -63,7 +64,6 @@ public class GUIHandler : MonoBehaviour {
 	}
 
 	public void Open(HexagonBehavior _hexagon){
-		opened = true;
 		bottom.gameObject.SetActive (true);
 		outlined = _hexagon;
 		bottom.Open (_hexagon);
@@ -73,7 +73,6 @@ public class GUIHandler : MonoBehaviour {
 	}
 
 	public void Close(){
-		opened = false;
 		bottom.Off ();
 		outline.SetActive (false);
 	}

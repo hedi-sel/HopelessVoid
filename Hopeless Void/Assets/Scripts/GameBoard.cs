@@ -29,6 +29,9 @@ public class GameBoard : MonoBehaviour {
 		E,NE,NW,W,SW,SE
 	};
 
+	public static void DeleteInstance(){
+		m_Instance = null;
+	}
 
 	public float xMax, xMin, yMax, yMin;
 	public GameObject prefabHexagon;
@@ -65,6 +68,7 @@ public class GameBoard : MonoBehaviour {
 		
 		if (map.Count == 1 || Parameters[3]<1 ){
 			GameHandler.instance.SetState ("MenuScene");
+			return;
 		}
 
 		HexagonBehavior[] hexagons = new HexagonBehavior[map.Count];
