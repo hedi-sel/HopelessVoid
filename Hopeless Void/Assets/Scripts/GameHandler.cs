@@ -44,8 +44,22 @@ public class GameHandler : MonoBehaviour {
 
 	void Start () {
 		destination = transform.position;
+
 	}
+
+	float xMax; float xMin;	float yMax; float yMin;
 	void Update () {
+		float a =GameBoard.instance.GetComponent<Transform>().localScale.x;
+		//print (a);
+		/*xMax = GameBoard.instance.xMax * (1-a)  + GameBoard.instance.xMin * a;
+		xMin = GameBoard.instance.xMax * a + GameBoard.instance.xMin * (1-a);
+		yMax = GameBoard.instance.yMax * (1-a) + GameBoard.instance.yMin * a;
+		yMin = GameBoard.instance.yMax * a + GameBoard.instance.yMin * (1-a);*/
+		xMax = GameBoard.instance.xMax * a;
+		xMin = GameBoard.instance.xMin * a;
+		yMax = GameBoard.instance.yMax * a;
+		yMin = GameBoard.instance.yMin * a;
+
 		if (Input.GetButtonDown ("Right Click")) {
 			mouseLastPos = new Vector3(0,0,0) ;
 			destination = transform.position;
@@ -53,28 +67,29 @@ public class GameHandler : MonoBehaviour {
 		if (Input.GetButton("Right Click")) {
 			destination = destination - getMouseSpeed() ;
 		}
-		if ( destination != transform.position )
-			transform.position = lineariser(destination + transform.position) / 2;
+		if (destination != transform.position) {
+			transform.position = borner ((destination + transform.position) / 2);
+		}
 		if (Input.GetButtonUp ("Right Click")) {
 			mouseLastPos = new Vector3 (0, 0, 0);
 		}
 	}
 
 	/*bool accessible(Vector3 position){
-		return position.x < GameBoard.instance.xMax && position.y < GameBoard.instance.yMax &&
-		position.x > GameBoard.instance.xMin && position.y > GameBoard.instance.yMin;
+		return position.x < xMax && position.y < yMax &&
+		position.x > xMin && position.y > yMin;
 			
 	}*/
 
-	Vector3 lineariser(Vector3 position){
-		if (position.x < GameBoard.instance.xMax)
-			position.x = GameBoard.instance.xMax;
-		else if (position.y < GameBoard.instance.yMax)
-			position.y = GameBoard.instance.yMax;
-		else if (position.x > GameBoard.instance.xMin)
-			position.x = GameBoard.instance.xMin;
-		else if (position.y > GameBoard.instance.yMin)
-			position.y = GameBoard.instance.yMin;
+	Vector3 borner(Vector3 position){
+		if (position.x > xMax)
+			position.x = xMax;
+		if (position.y > yMax)
+			position.y = yMax;
+		if (position.x < xMin)
+			position.x = xMin;
+		if (position.y < yMin)
+			position.y = yMin;
 		return position;
 	}
 

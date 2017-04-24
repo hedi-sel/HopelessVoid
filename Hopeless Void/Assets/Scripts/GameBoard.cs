@@ -146,7 +146,6 @@ public class GameBoard : MonoBehaviour {
 		
 		}
 		// Positions extremes
-		xMax = 0;xMax = 0;xMax = 0;xMax = 0;
 		foreach (HexagonBehavior hex in map.Values) {
 			if (hex.transform.position.x > xMax) {
 				xMax = hex.transform.position.x;
@@ -158,6 +157,7 @@ public class GameBoard : MonoBehaviour {
 				yMin = hex.transform.position.y;
 			}
 		}
+
 	}
 		
 
