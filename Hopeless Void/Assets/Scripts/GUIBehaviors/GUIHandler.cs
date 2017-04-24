@@ -100,7 +100,7 @@ public class GUIHandler : MonoBehaviour {
 	public void GameOver(){
 		gameOver.SetActive(true);
 		nextTurn.SetActive(false);
-		GameBoard.instance.gameObject.SetActive (false);
+		//GameBoard.instance.gameObject.SetActive (false);
 
 		SoundHandler.instance.playMusic ("gameOver");
 	}
@@ -108,14 +108,12 @@ public class GUIHandler : MonoBehaviour {
 		victory.SetActive(true);
 		nextTurn.SetActive(false);
 		intro.SetActive(true);
-		GameBoard.instance.gameObject.SetActive (false);
+		//GameBoard.instance.gameObject.SetActive (false);
 
 		SoundHandler.instance.playMusic ("victory");
 
 	}
 	public void Intro(){
 		intro.SetActive(false);
-		GameBoard.instance.gameObject.SetActive (true);
-
 	}
 }

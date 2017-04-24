@@ -15,6 +15,7 @@ public class GameHandler : MonoBehaviour {
 	public SoundHandler soundHandler;
 
 	void Awake(){
+		DontDestroyOnLoad (transform.gameObject);
 		if (m_Instance != null) {
 			Destroy (this);
 		} else {
