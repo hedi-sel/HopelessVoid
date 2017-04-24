@@ -103,7 +103,12 @@ public class GameBoard : MonoBehaviour {
 
 		updateInterfaceParameters ();
 
-		//Verifer si les tuiles sont au bords
+		checkDestructibleCells ();
+
+
+	}
+
+	void checkDestructibleCells(){
 		foreach (HexagonBehavior hex in map.Values) {
 			if (destructible (hex)) {
 				hex.effectRenderer.sprite = voidSprite;
@@ -111,8 +116,6 @@ public class GameBoard : MonoBehaviour {
 				hex.effectRenderer.sprite = null;
 			}
 		}
-
-
 	}
 		
 	//HexagonProperties
@@ -121,6 +124,8 @@ public class GameBoard : MonoBehaviour {
 		dirToVectInit ();
 		ConstantBoard.instance.HexagonPropertiesInit ();
 		generateMap ( new Vector2(15,5) );
+		checkDestructibleCells ();
+
 	}
 	
 	private float currentScale=0.5f;

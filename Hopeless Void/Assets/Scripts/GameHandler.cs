@@ -50,11 +50,7 @@ public class GameHandler : MonoBehaviour {
 	float xMax; float xMin;	float yMax; float yMin;
 	void Update () {
 		float a =GameBoard.instance.GetComponent<Transform>().localScale.x;
-		//print (a);
-		/*xMax = GameBoard.instance.xMax * (1-a)  + GameBoard.instance.xMin * a;
-		xMin = GameBoard.instance.xMax * a + GameBoard.instance.xMin * (1-a);
-		yMax = GameBoard.instance.yMax * (1-a) + GameBoard.instance.yMin * a;
-		yMin = GameBoard.instance.yMax * a + GameBoard.instance.yMin * (1-a);*/
+
 		xMax = GameBoard.instance.xMax * a;
 		xMin = GameBoard.instance.xMin * a;
 		yMax = GameBoard.instance.yMax * a;
