@@ -229,16 +229,16 @@ public class HexagonBehavior : MonoBehaviour {
 		}
 	}
 
-	void warningOn (){
+	public void warningOn (){
 		warningRenderer.sprite = warningSprite;
 		isWarned = true;
 	}
 
-	void warningOff (){
+	public void warningOff (){
 		warningRenderer.sprite = null;
 	}
 
-	bool Warned (){
+	public bool Warned (){
 		return isWarned && (popMax == population);
 	}
 

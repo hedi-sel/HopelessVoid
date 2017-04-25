@@ -102,6 +102,8 @@ public class GameBoard : MonoBehaviour {
 					hexagon.population -= 1;
 					occupiedPopulation -= 1;
 					GUIHandler.instance.DiedOn (hexagon);
+					if (hexagon.Warned ())
+						hexagon.warningOn ();
 				}
 				
 			}
