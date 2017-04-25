@@ -87,7 +87,7 @@ public class HexagonBehavior : MonoBehaviour {
 		else
 			return false; 
 		GameBoard.instance.updateInterfaceParameters ();
-		if (isWarned && popMax == population) {
+		if (Warned()) {
 			warningOn ();
 		}else{
 			warningOff();
