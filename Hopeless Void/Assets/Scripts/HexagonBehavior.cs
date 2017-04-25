@@ -23,6 +23,10 @@ public class HexagonBehavior : MonoBehaviour {
 	public SpriteRenderer buildingRenderer;
 	public SpriteRenderer effectRenderer;
 
+	public SpriteRenderer warningRenderer;
+	public Sprite warningSprite;
+	public bool isWarned = false;
+
 	public int population;
 	public int popMax;
 	public int locked;
@@ -51,12 +55,16 @@ public class HexagonBehavior : MonoBehaviour {
 	public bool commit() {
 		GUIHandler.instance.Close ();
 		if (population == popMax) {
-			if (! (building == BuildingAction.NONE) || ! (action == BuildingAction.FACTORY) ) {
+			if (! (action == BuildingAction.FACTORY) ) {
 				computeRessources ();
-			} else {				
+			} else if ((building == BuildingAction.NONE)) {				
 				building = action;
 				popMax = ConstantBoard.popAction [building];
 				buildingRenderer.sprite = ConstantBoard.sprites [ConstantBoard.idBuilding [BuildingAction.CAPITALE]];
+			} else {//Working in the factory
+				if (  isSuperior ( GameBoard.instance.Parameters, neg (ConstantBoard.effectAction [action]) )  ) {
+					computeRessources ();
+				}
 			}
 
 		}
@@ -79,6 +87,11 @@ public class HexagonBehavior : MonoBehaviour {
 		else
 			return false; 
 		GameBoard.instance.updateInterfaceParameters ();
+		if (isWarned && popMax == population) {
+			warningOn ();
+		}else{
+			warningOff();
+		}
 		return true;
 
 	}
@@ -115,6 +128,7 @@ public class HexagonBehavior : MonoBehaviour {
 				popMax = ConstantBoard.popConstruction [action];
 				buildingRenderer.sprite = ConstantBoard.sprites [ConstantBoard.idBuilding [action]];
 				SoundHandler.instance.playSound ("batiment");
+				warningOn ();
 			} else {
 				return false;
 			}
@@ -214,6 +228,20 @@ public class HexagonBehavior : MonoBehaviour {
 			return null;
 		}
 	}
+
+	void warningOn (){
+		warningRenderer.sprite = warningSprite;
+		isWarned = true;
+	}
+
+	void warningOff (){
+		warningRenderer.sprite = null;
+	}
+
+	bool Warned (){
+		return isWarned && (popMax == population);
+	}
+
 	void OnMouseEnter() {
 		GUIHandler.instance.Highlight (this);
 

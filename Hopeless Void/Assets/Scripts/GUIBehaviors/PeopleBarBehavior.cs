@@ -8,10 +8,12 @@ public class PeopleBarBehavior : MonoBehaviour {
 	public PeopleArrowBehavior left;
 	public PeopleArrowBehavior right;
 	public Text fraction;
+	public GameObject warning;
 
 	private BottomBarBehavior bar;
 
 	void Awake() {
+		warning.SetActive (false);
 		left.SetBar (this);
 		right.SetBar (this);
 

@@ -17,6 +17,9 @@ public struct ActionPanel {
 
 public class ActionPanelBehavior : MonoBehaviour {
 
+	private BoxCollider2D box;
+	private RectTransform rect;
+
 	public Text textName;
 	public Text textAction;
 	public Text textFraction;
@@ -26,9 +29,15 @@ public class ActionPanelBehavior : MonoBehaviour {
 public ActionPanel actionPanel;
 
 	void Awake(){
+		rect = GetComponent<RectTransform> ();
+		box = GetComponent<BoxCollider2D> ();
 		if (actionPanel.name!="") {
 			SetActionPanel (actionPanel);
 		}
+	}
+
+	void Update(){
+		box.size = new Vector2(rect.rect.width,rect.rect.height);
 	}
 
 	public void SetActionPanel(ActionPanel _actionPanel){
@@ -92,4 +101,18 @@ public ActionPanel actionPanel;
 		image = GetComponent<Image> ();
 		image.sprite = light;
 	}
+
+	private bool pushed = false;
+
+	void OnMouseOver() {
+		if (Input.GetMouseButtonDown (0)) {
+			if (!pushed) {
+				GetComponentInParent<ActionHolderBehavior> ().Pushed();
+				pushed = true;
+			}
+		} else if (pushed) {
+			pushed = false;
+		}
+	}
+
 }

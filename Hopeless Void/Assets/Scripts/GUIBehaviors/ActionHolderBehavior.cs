@@ -27,22 +27,10 @@ public class ActionHolderBehavior : MonoBehaviour {
 
 	private bool pushed = false;
 
-	void OnMouseOver() {
-		if (Input.GetMouseButtonDown (0)) {
-			if (!pushed) {
-				Pushed ();
-				pushed = true;
-			}
-		} else if (pushed) {
-			pushed = false;
-		}
-	}
-
-
 	public List<ActionOptionPanelBehavior> options = new List<ActionOptionPanelBehavior>();
 	public GameObject panelTemplate;
 
-	void Pushed(){
+	public void Pushed(){
 		if (opened) {
 			Close ();
 		} else {
