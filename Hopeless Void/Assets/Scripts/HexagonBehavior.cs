@@ -23,6 +23,10 @@ public class HexagonBehavior : MonoBehaviour {
 	public SpriteRenderer buildingRenderer;
 	public SpriteRenderer effectRenderer;
 
+	public SpriteRenderer warningRenderer;
+	public Sprite warningSprite;
+	public bool isWarned = false;
+
 	public int population;
 	public int popMax;
 	public int locked;
@@ -84,6 +88,11 @@ public class HexagonBehavior : MonoBehaviour {
 		else
 			return false; 
 		GameBoard.instance.updateInterfaceParameters ();
+		if (isWarned && popMax == population) {
+			warningOn ();
+		}else{
+			warningOff();
+		}
 		return true;
 
 	}
@@ -120,6 +129,7 @@ public class HexagonBehavior : MonoBehaviour {
 				popMax = ConstantBoard.popConstruction [action];
 				buildingRenderer.sprite = ConstantBoard.sprites [ConstantBoard.idBuilding [action]];
 				SoundHandler.instance.playSound ("batiment");
+				warningOn ();
 			} else {
 				return false;
 			}
@@ -219,6 +229,20 @@ public class HexagonBehavior : MonoBehaviour {
 			return null;
 		}
 	}
+
+	void warningOn (){
+		warningRenderer.sprite = warningSprite;
+		isWarned = true;
+	}
+
+	void warningOff (){
+		warningRenderer.sprite = null;
+	}
+
+	bool Warned (){
+		return isWarned && (popMax == population);
+	}
+
 	void OnMouseEnter() {
 		GUIHandler.instance.Highlight (this);
 
