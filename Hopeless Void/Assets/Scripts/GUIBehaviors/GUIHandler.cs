@@ -115,7 +115,6 @@ public class GUIHandler : MonoBehaviour {
 	public void Victory(){
 		victory.SetActive(true);
 		nextTurn.SetActive(false);
-		intro.SetActive(true);
 		//GameBoard.instance.gameObject.SetActive (false);
 
 		SoundHandler.instance.playMusic ("victory");
