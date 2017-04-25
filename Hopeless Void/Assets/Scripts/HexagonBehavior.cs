@@ -114,6 +114,7 @@ public class HexagonBehavior : MonoBehaviour {
 	public void collapse (){ // A modifier
 		GameBoard.instance.Parameters [3] -= population;
 		GameBoard.instance.occupiedPopulation -= population;
+		population = 0;
 		//Jouer l'animation
 		GameObject g = Instantiate(eaten,transform);
 	}
