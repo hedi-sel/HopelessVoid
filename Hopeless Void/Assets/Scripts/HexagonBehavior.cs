@@ -239,7 +239,7 @@ public class HexagonBehavior : MonoBehaviour {
 	}
 
 	public bool Warned (){
-		return isWarned && (popMax == population);
+		return isWarned && (popMax != population);
 	}
 
 	void OnMouseEnter() {
