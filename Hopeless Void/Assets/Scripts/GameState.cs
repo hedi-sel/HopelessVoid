@@ -21,12 +21,12 @@ public class GameState : State {
 
 		if (Input.GetButtonDown ("Right Click")) {
 			mouseLastPos = new Vector3 (0, 0, 0);
-			destination = transform.position;
+			destination = GameHandler.instance.transform.position;
 		}
 		if (Input.GetButton ("Right Click")) {
 			destination = destination - getMouseSpeed ();
 		}
-		if (destination != transform.position) {
+		if (destination != GameHandler.instance.transform.position) {
 			destination.z = GameHandler.instance.transform.position.z;
 			GameHandler.instance.transform.position = borner ((destination + GameHandler.instance.transform.position) / 2);
 		}
